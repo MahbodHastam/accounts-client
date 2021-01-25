@@ -58,6 +58,7 @@ export default {
   display: inline-flex;
   align-items: center;
   width: 30%;
+  background-color: #eee;
 }
 
 #phone-number {
