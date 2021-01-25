@@ -1,32 +1,65 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <div class="nav-item">
+        <ion-icon name="menu-outline"></ion-icon>
+      </div>
+      <div class="nav-item">
+        <ion-icon name="person-circle-outline"></ion-icon>
+      </div>
+      <div class="nav-item">
+        <ion-icon name="grid-outline"></ion-icon>
+      </div>
     </div>
     <router-view />
   </div>
 </template>
 
+<script>
+export default {}
+</script>
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@200;300;400;500&family=Poppins:wght@600;700&display=swap');
+
+*,
+*::after,
+*::before {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 #nav {
-  padding: 30px;
+  height: 48px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 8px;
+  background-color: #0d0d0d;
 }
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Poppins', sans-serif;
 }
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+a,
+p {
+  font-family: 'Mulish', sans-serif;
+}
+.nav-item {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  place-items: center;
+  place-content: center;
+}
+#nav .nav-item ion-icon {
+  color: #eee !important;
+  font-size: 30px;
 }
 </style>
