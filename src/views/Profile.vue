@@ -28,7 +28,7 @@ export default {
     methods: {
       complete() {
         var self = this
-        axios.get(`http://192.168.1.103:4433/api/v1/completeProfile?user_firstname=${self.firstName}&user_lastname=${self.lastName}`)
+        axios.get(`https://accounts.myren.xyz/api/v1/completeProfile?user_firstname=${self.firstName}&user_lastname=${self.lastName}`, {withCredentials: true})
           .then( response => {
             console.log(response)
             if(response.data.ok){

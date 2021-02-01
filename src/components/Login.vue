@@ -36,7 +36,7 @@ export default {
   methods: {
     next() {
       var self = this
-      axios.get('http://192.168.1.103:4433/api/v1/generateCode?phone_number=' + this.prefix + this.phoneNumber)
+      axios.get('https://accounts.myren.xyz/api/v1/generateCode?phone_number=' + this.prefix + this.phoneNumber, {withCredentials: true})
         .then(response => {
           console.log(response)
           self.$store.commit('updatePhone', self.prefix + self.phoneNumber)
