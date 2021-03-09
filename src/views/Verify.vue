@@ -31,7 +31,7 @@ export default {
   methods: {
     next() {
       var self = this
-      axios.get(`https://account.myren.xyz/api/v1/verifyCode?phone_number=${self.$store.state.phoneNumber}&verification_code=${self.code}`, {withCredentials: true})
+      axios.get(`https://accounts.myren.xyz/api/v1/verifyCode?phone_number=${self.$store.state.phoneNumber}&verification_code=${self.code}`, {withCredentials: true})
         .then( response => {
           console.log(response)
           if(response.data.ok){
