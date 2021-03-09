@@ -7,10 +7,10 @@
     <div class="inputs">
       <input
         type="tel"
-        placeholder=" -----"
+        placeholder=" ------"
         v-model="code"
         id="code"
-        maxlength="5"
+        maxlength="6"
       />
     </div>
     <div class="bottom-actions">
