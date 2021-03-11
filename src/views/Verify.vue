@@ -15,6 +15,7 @@
     </div>
     <div class="bottom-actions">
       <button class="actions">Help</button>
+      <button class="actions" @click="back">Change Number</button>
       <button class="actions next" @click="next">Next</button>
     </div>
   </div>
@@ -30,6 +31,11 @@ export default {
   },
   methods: {
     next() {
+      if (this.code == null || this.code.length != 6) {
+        // console.log(this.code)
+        return
+      }
+
       var self = this
       axios.get(`https://accounts.myren.xyz/api/v1/verifyCode?phone_number=${self.$store.state.phoneNumber}&verification_code=${self.code}`, {withCredentials: true})
         .then( response => {
@@ -40,6 +46,9 @@ export default {
         })
         .catch( error => console.log(error) )
         .then()
+    },
+    back() {
+      this.$router.push("/signin")
     }
   }
 }
@@ -59,14 +68,16 @@ export default {
   display: flex;
   align-items: center;
   background-color: #eee;
-  letter-spacing: 16px;
+  letter-spacing: 12px;
   margin-left: 8px;
   margin: 0 auto;
   font-size: 18px;
+  width: 100%;
 }
 .inputs {
   margin-top: 16px;
   padding: 8px;
+  width: 100%;
 }
 .bottom-actions {
   margin-top: 16px;

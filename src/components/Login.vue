@@ -2,11 +2,12 @@
   <div class="login-cmp-wrapper">
     <h2>Welcome to Myren</h2>
     <p>
-      In order to use our services you need to sign up or login, if you already
-      have an Account
+      In order to use our services you need to sign up, or log in if you already
+      have an account
     </p>
     <div class="inputs">
-      <select v-model="prefix" name="country" id="country-code">
+      <select v-model="prefix" name="country" id="country-code" required>
+        <option value="null" disabled hidden selected>select</option>
         <option value="98">IRI (+98)</option>
         <option value="1">US (+1)</option>
       </select>
@@ -92,4 +93,5 @@ export default {
   color: blue;
   border-radius: 0px;
 }
+
 </style>

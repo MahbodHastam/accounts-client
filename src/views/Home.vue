@@ -1,23 +1,30 @@
 <template>
-  <div class="home">
-    <Login />
-  </div>
+    <h3>Welcome {{this.name}} {{this.lastname}}</h3>
 </template>
-
 <script>
-// @ is an alias to /src
-import Login from '@/components/Login.vue'
+import axios from 'axios'
 
 export default {
-  name: 'Home',
-  components: {
-    Login
-  }
+    name: "Home",
+    data: function() {
+        return {
+            name: "Mehrdad",
+            lastname: "Akbari"
+        }
+    },
+    created() {
+        axios.get('https://accounts.myren.xyz/api/v1/getProfile', {withCredentials: true})
+        .then(response => {
+          console.log(response)
+        })
+        .catch(error => console.log(error))
+        .then(() => {})
+    }
 }
 </script>
-
 <style scoped>
-.home {
-  padding: 16px 8px !important;
+h3 {
+    text-align: center;
+    margin-top: 24px;
 }
 </style>
