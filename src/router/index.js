@@ -8,7 +8,10 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    meta: {
+      title: "Myren | Accounts"
+    }
   },
   {
     path: '/verify',
@@ -22,6 +25,9 @@ const routes = [
     //   if (from.name !== 'Home') next({ name: 'Home' }) 
     //   else next()
     // }
+    meta: {
+      title: "Myren | Verify"
+    }
   },
   {
     path: '/profile',
@@ -32,6 +38,27 @@ const routes = [
     //   if (from.name !== 'Home') next({ name: 'Home' }) 
     //   else next()
     // }
+    meta: {
+      title: "Myren | Profile"
+    }
+  },
+  {
+    path: '/welcome',
+    name: 'Welcome',
+    component: () =>
+      import('../views/Welcome.vue'),
+    meta: {
+      title: "Myren | Welcome"
+    }
+  },
+  {
+    path: '/signin',
+    name: 'Signin',
+    component: () =>
+      import('../views/Signin.vue'),
+    meta: {
+      title: "Myren | Sign In"
+    }
   }
 ]
 
