@@ -5,10 +5,10 @@
         <ion-icon name="menu-outline"></ion-icon>
       </div>
       <div class="nav-item">
-        <ion-icon name="person-circle-outline"></ion-icon>
+        <h2>ACCOUNTS</h2>
       </div>
       <div class="nav-item">
-        <ion-icon name="grid-outline"></ion-icon>
+        <ion-icon name="person-circle-outline"></ion-icon>
       </div>
     </div>
     <router-view />
@@ -16,7 +16,16 @@
 </template>
 
 <script>
-export default {}
+export default {
+  watch: {
+    '$route':{
+        handler: (to) => {
+          document.title = to.meta.title || 'Your Website'
+        },
+         immediate: true
+      }
+  }
+}
 </script>
 
 <style>
@@ -46,6 +55,7 @@ h4,
 h5,
 h6 {
   font-family: 'Poppins', sans-serif;
+  font-weight: 500;
 }
 a,
 p {
@@ -58,8 +68,17 @@ p {
   place-items: center;
   place-content: center;
 }
+.nav-item h2 {
+  color: #fff;
+  font-size: 11px;
+  letter-spacing: 10px;
+}
 #nav .nav-item ion-icon {
   color: #eee !important;
   font-size: 30px;
+}
+input, select, option {
+  font-family: mulish;
+  font-weight: 300;
 }
 </style>
