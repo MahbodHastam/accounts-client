@@ -41,7 +41,7 @@ export default {
         .then( response => {
           console.log(response)
           if(response.data.ok){
-            self.$router.push("profile")
+            self.$router.push("completeprofile")
           }
         })
         .catch( error => console.log(error) )
