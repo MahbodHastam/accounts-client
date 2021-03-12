@@ -59,6 +59,24 @@ const routes = [
     meta: {
       title: "Myren | Sign In"
     }
+  },
+  {
+    path: '/editprofile',
+    name: 'EditProfile',
+    component: () =>
+      import('../views/EditProfile.vue'),
+    meta: {
+      title: "Myren | Edit Profile"
+    }
+  },
+  {
+    path: '/data',
+    name: 'Data',
+    component: () =>
+      import('../views/Data.vue'),
+    meta: {
+      title: "Myren | Your Data"
+    }
   }
 ]
 
