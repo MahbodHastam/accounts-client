@@ -18,12 +18,12 @@
 <script>
 export default {
   watch: {
-    '$route':{
-        handler: (to) => {
-          document.title = to.meta.title || 'Your Website'
-        },
-         immediate: true
-      }
+    $route: {
+      handler: to => {
+        document.title = to.meta.title || 'Your Website'
+      },
+      immediate: true
+    }
   }
 }
 </script>
@@ -77,7 +77,9 @@ p {
   color: #eee !important;
   font-size: 30px;
 }
-input, select, option {
+input,
+select,
+option {
   font-family: mulish;
   font-weight: 300;
 }

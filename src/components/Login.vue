@@ -37,11 +37,17 @@ export default {
   methods: {
     next() {
       var self = this
-      axios.get('https://accounts.myren.xyz/api/v1/generateCode?phone_number=' + this.prefix + this.phoneNumber, {withCredentials: true})
+      axios
+        .get(
+          'https://accounts.myren.xyz/api/v1/generateCode?phone_number=' +
+            this.prefix +
+            this.phoneNumber,
+          { withCredentials: true }
+        )
         .then(response => {
           console.log(response)
           self.$store.commit('updatePhone', self.prefix + self.phoneNumber)
-          self.$router.push("verify")
+          self.$router.push('verify')
         })
         .catch(error => console.log(error))
         .then(() => {})
@@ -93,5 +99,4 @@ export default {
   color: blue;
   border-radius: 0px;
 }
-
 </style>

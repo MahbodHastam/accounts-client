@@ -2,7 +2,8 @@
   <div class="verify">
     <h2>SMS has been sent!</h2>
     <p>
-      verification code has been sent to you, please check it and enter it, in input below and make sure you are not entering it wrong
+      verification code has been sent to you, please check it and enter it, in
+      input below and make sure you are not entering it wrong
     </p>
     <div class="inputs">
       <input
@@ -24,7 +25,7 @@
 <script>
 import axios from 'axios'
 export default {
-  data () {
+  data() {
     return {
       code: null
     }
@@ -37,18 +38,22 @@ export default {
       }
 
       var self = this
-      axios.get(`https://accounts.myren.xyz/api/v1/verifyCode?phone_number=${self.$store.state.phoneNumber}&verification_code=${self.code}`, {withCredentials: true})
-        .then( response => {
+      axios
+        .get(
+          `https://accounts.myren.xyz/api/v1/verifyCode?phone_number=${self.$store.state.phoneNumber}&verification_code=${self.code}`,
+          { withCredentials: true }
+        )
+        .then(response => {
           console.log(response)
-          if(response.data.ok){
-            self.$router.push("completeprofile")
+          if (response.data.ok) {
+            self.$router.push('completeprofile')
           }
         })
-        .catch( error => console.log(error) )
+        .catch(error => console.log(error))
         .then()
     },
     back() {
-      this.$router.push("/signin")
+      this.$router.push('/signin')
     }
   }
 }

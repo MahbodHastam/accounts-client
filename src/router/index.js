@@ -10,7 +10,7 @@ const routes = [
     name: 'Home',
     component: Home,
     meta: {
-      title: "Myren | Accounts"
+      title: 'Myren | Accounts'
     }
   },
   {
@@ -22,60 +22,63 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ '../views/Verify.vue'),
     // beforeEnter: (to, from, next) => {
-    //   if (from.name !== 'Home') next({ name: 'Home' }) 
+    //   if (from.name !== 'Home') next({ name: 'Home' })
     //   else next()
     // }
     meta: {
-      title: "Myren | Verify"
+      title: 'Myren | Verify'
     }
   },
   {
     path: '/profile',
     name: 'Profile',
-    component: () =>
-      import('../views/Profile.vue'),
+    component: () => import('../views/Profile.vue'),
     // beforeEnter: (to, from, next) => {
-    //   if (from.name !== 'Home') next({ name: 'Home' }) 
+    //   if (from.name !== 'Home') next({ name: 'Home' })
     //   else next()
     // }
     meta: {
-      title: "Myren | Profile"
+      title: 'Myren | Profile'
     }
   },
   {
     path: '/welcome',
     name: 'Welcome',
-    component: () =>
-      import('../views/Welcome.vue'),
+    component: () => import('../views/Welcome.vue'),
     meta: {
-      title: "Myren | Welcome"
+      title: 'Myren | Welcome'
     }
   },
   {
     path: '/signin',
     name: 'Signin',
-    component: () =>
-      import('../views/Signin.vue'),
+    component: () => import('../views/Signin.vue'),
     meta: {
-      title: "Myren | Sign In"
+      title: 'Myren | Sign In'
     }
   },
   {
     path: '/editprofile',
     name: 'EditProfile',
-    component: () =>
-      import('../views/EditProfile.vue'),
+    component: () => import('../views/EditProfile.vue'),
     meta: {
-      title: "Myren | Edit Profile"
+      title: 'Myren | Edit Profile'
     }
   },
   {
     path: '/data',
     name: 'Data',
-    component: () =>
-      import('../views/Data.vue'),
+    component: () => import('../views/Data.vue'),
     meta: {
-      title: "Myren | Your Data"
+      title: 'Myren | Your Data'
+    }
+  },
+  {
+    path: '/intro',
+    name: 'Intro',
+    component: () => import('../views/Intro.vue'),
+    meta: {
+      title: 'Myren | Introduction'
     }
   }
 ]
