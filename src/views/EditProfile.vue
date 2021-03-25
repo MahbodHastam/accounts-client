@@ -30,7 +30,7 @@ export default {
           if (response.data.ok) {
             console.log('done!')
             //go to show all products!
-            self.$router.push('welcome')
+            self.$router.push('/welcome')
           }
         })
         .catch(error => console.log(error))
