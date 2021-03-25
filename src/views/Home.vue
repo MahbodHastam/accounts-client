@@ -32,12 +32,6 @@ import axios from 'axios'
 import { mapState } from 'vuex'
 export default {
   name: 'Home',
-  // data: function() {
-  //     return {
-  //         name: "Mehrdad",
-  //         lastname: "Akbari"
-  //     }
-  // },
   computed: mapState(['userInfo']),
   beforeCreate() {
     var self = this
