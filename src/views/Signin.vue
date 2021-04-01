@@ -1,5 +1,8 @@
 <template>
   <div class="home">
+    <div class="topper">
+      <h4>Sign In</h4>
+    </div>
     <Login />
   </div>
 </template>
@@ -17,7 +20,17 @@ export default {
 </script>
 
 <style scoped>
+.topper {
+  height: 30vh;
+  display: flex;
+  place-content: center;
+  place-items: center;
+}
+.topper h4 {
+  font-size: 22px;
+  font-weight: bold;
+}
 .home {
-  padding: 16px 8px !important;
+  padding: 16px !important;
 }
 </style>

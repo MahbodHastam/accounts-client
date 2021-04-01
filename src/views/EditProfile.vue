@@ -1,10 +1,18 @@
 <template>
   <div class="profile">
-    <p>Firstname :</p>
+    <div class="topper">
+      <h4>Verify</h4>
+    </div> 
+    <p>Complete your profile, minimum info needed are your firstname and lastname.</p>
+    <span>Firstname</span>
     <input type="text" placeholder="example: Mehrdad" v-model="firstName" />
-    <p>Lastname :</p>
+    <span>Lastname</span>
     <input type="text" placeholder="example: Akbari" v-model="lastName" />
-    <button @click="complete">Save</button>
+
+    <div class="bottom-actions">
+      <button class="actions">Privacy</button>
+      <button class="actions next" @click="complete">Save</button>
+    </div>
   </div>
 </template>
 
@@ -41,30 +49,66 @@ export default {
 </script>
 
 <style scoped>
+p {
+  margin-bottom: 25px;
+}
+.topper {
+  height: 30vh;
+  display: flex;
+  place-content: center;
+  place-items: center;
+}
+.topper h4 {
+  font-size: 22px;
+  font-weight: bold;
+}
 .profile {
-  padding: 16px 8px;
+  padding: 16px;
 }
 input {
-  padding: 8px;
+  padding: 10px;
   border: none;
   outline: none;
-  height: 38px;
+  height: 48px;
   display: block;
   align-items: center;
   background-color: #eee;
   width: 100%;
   padding: 8px;
   margin-bottom: 8px;
+  border-radius: 24px;
 }
-button {
+
+.bottom-actions {
+  position: absolute;
+  bottom: 8px;
+  width: calc(100vw - 32px);
+  display: flex;
+  justify-content: space-between;
+}
+.actions {
   border: none;
   outline: none;
   font-size: 16px;
-  padding: 8px;
   background: none;
-  color: blue;
-  border-radius: 0px;
+  height: 48px;
+  padding: 15px 26px;
+  border-radius: 24px;
+  display: flex;
+  place-content: center;
+  place-items: center;
+  font-family: 'Mullish', sans-serif;
+  font-weight: bold;
+  min-width: 85px;
+}
+.next {
+  color: #003CFF;
+  background: #EDF1FF;
+}
+span {
   display: block;
-  background-color: #eee;
+  font-family: 'Mulish', sans-serif;
+  font-size: 12px;
+  transform: translate(15px, 10px);
 }
 </style>

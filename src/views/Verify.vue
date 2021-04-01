@@ -1,10 +1,13 @@
 <template>
   <div class="verify">
-    <h2>SMS has been sent!</h2>
+    <div class="topper">
+      <h4>Verify</h4>
+    </div> 
+
     <p>
-      verification code has been sent to you, please check it and enter it, in
-      input below and make sure you are not entering it wrong
+      Verification code has been sent to you, please check it and enter it in input below and make sure you are not entering it wrong.
     </p>
+
     <div class="inputs">
       <input
         type="tel"
@@ -13,10 +16,11 @@
         id="code"
         maxlength="6"
       />
+
+      <p class="std">Didn't Received Yet? <span>Request Again</span> </p>
     </div>
     <div class="bottom-actions">
-      <button class="actions">Help</button>
-      <button class="actions" @click="back">Change Number</button>
+      <button class="actions" @click="back">Wrong Number?</button>
       <button class="actions next" @click="next">Next</button>
     </div>
   </div>
@@ -60,32 +64,46 @@ export default {
 </script>
 
 <style scoped>
+.topper {
+  height: 30vh;
+  display: flex;
+  place-content: center;
+  place-items: center;
+}
+.topper h4 {
+  font-size: 22px;
+  font-weight: bold;
+}
+
 .verify {
-  padding: 16px 8px !important;
+  padding: 16px !important;
 }
 
 #code {
-  text-align: center;
-  padding: 8px;
+  padding: 10px;
   border: none;
   outline: none;
-  height: 38px;
+  height: 48px;
   display: flex;
-  align-items: center;
+  place-items: center;
+  place-content: center;
+  text-align: center;
   background-color: #eee;
   letter-spacing: 12px;
-  margin-left: 8px;
-  margin: 0 auto;
   font-size: 18px;
+  font-weight: bold;
   width: 100%;
+  border-radius: 24px;
 }
 .inputs {
-  margin-top: 16px;
+  margin-top: 25px;
   padding: 8px;
   width: 100%;
 }
 .bottom-actions {
-  margin-top: 16px;
+  position: absolute;
+  bottom: 8px;
+  width: calc(100vw - 32px);
   display: flex;
   justify-content: space-between;
 }
@@ -93,11 +111,28 @@ export default {
   border: none;
   outline: none;
   font-size: 16px;
-  padding: 8px;
   background: none;
+  height: 48px;
+  padding: 15px 26px;
+  border-radius: 24px;
+  display: flex;
+  place-content: center;
+  place-items: center;
+  font-family: 'Mullish', sans-serif;
+  font-weight: bold;
+  min-width: 85px;
 }
 .next {
-  color: blue;
-  border-radius: 0px;
+  color: #003CFF;
+  background: #EDF1FF;
+}
+
+.std {
+  margin-top: 25px;
+  text-align: center;
+  font-size: 13px;
+}
+.std span {
+  color: #003CFF
 }
 </style>
