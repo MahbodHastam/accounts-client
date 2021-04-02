@@ -6,7 +6,7 @@
         <option value="+98">IRI (+98)</option>
         <option value="+1">US (+1)</option>
       </select>
-      <p id="code-model">{{prefix}}</p>
+      <p id="code-model">{{ prefix }}</p>
       <input
         type="tel"
         placeholder="example: 9920800113"
@@ -28,23 +28,26 @@ const axios = require('axios')
 export default {
   data() {
     return {
-      prefix: "+",
+      prefix: '+',
       phoneNumber: null
     }
   },
   methods: {
     next() {
       var self = this
-      var url = 'https://accounts.myren.xyz/api/v1/generateCode?phone_number=' + this.prefix.substring(1) + this.phoneNumber;
-      console.log(url);
+      var url =
+        'https://accounts.myren.xyz/api/v1/generateCode?phone_number=' +
+        this.prefix.substring(1) +
+        this.phoneNumber
+      console.log(url)
       axios
-        .get(
-          url,
-          { withCredentials: true }
-        )
+        .get(url, { withCredentials: true })
         .then(response => {
           console.log(response)
-          self.$store.commit('updatePhone', self.prefix.substring(1) + self.phoneNumber)
+          self.$store.commit(
+            'updatePhone',
+            self.prefix.substring(1) + self.phoneNumber
+          )
           self.$router.push('verify')
         })
         .catch(error => console.log(error))
@@ -123,7 +126,7 @@ export default {
   min-width: 85px;
 }
 .next {
-  color: #003CFF;
-  background: #EDF1FF;
+  color: #003cff;
+  background: #edf1ff;
 }
 </style>

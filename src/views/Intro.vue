@@ -1,13 +1,17 @@
 <template>
   <div class="intro">
     <h3>One For All</h3>
-    <p>in order to use Myren products you need to log in first, as soon as you log in, your info will sync up to all of our service, in other words log in once use many times</p>
+    <p>
+      in order to use Myren products you need to log in first, as soon as you
+      log in, your info will sync up to all of our service, in other words log
+      in once use many times
+    </p>
     <router-link to="/signin">sign in >></router-link>
   </div>
 </template>
 
 <style scoped>
-.intro{
+.intro {
   padding: 16px;
 }
 h3 {

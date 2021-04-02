@@ -2,8 +2,11 @@
   <div class="profile">
     <div class="topper">
       <h4>Verify</h4>
-    </div> 
-    <p>Complete your profile, minimum info needed are your firstname and lastname.</p>
+    </div>
+    <p>
+      Complete your profile, minimum info needed are your firstname and
+      lastname.
+    </p>
     <span>Firstname</span>
     <input type="text" placeholder="example: Mehrdad" v-model="firstName" />
     <span>Lastname</span>
@@ -102,8 +105,8 @@ input {
   min-width: 85px;
 }
 .next {
-  color: #003CFF;
-  background: #EDF1FF;
+  color: #003cff;
+  background: #edf1ff;
 }
 span {
   display: block;

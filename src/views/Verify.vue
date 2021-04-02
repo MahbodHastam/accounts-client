@@ -2,10 +2,11 @@
   <div class="verify">
     <div class="topper">
       <h4>Verify</h4>
-    </div> 
+    </div>
 
     <p>
-      Verification code has been sent to you, please check it and enter it in input below and make sure you are not entering it wrong.
+      Verification code has been sent to you, please check it and enter it in
+      input below and make sure you are not entering it wrong.
     </p>
 
     <div class="inputs">
@@ -17,7 +18,7 @@
         maxlength="6"
       />
 
-      <p class="std">Didn't Received Yet? <span>Request Again</span> </p>
+      <p class="std">Didn't Received Yet? <span>Request Again</span></p>
     </div>
     <div class="bottom-actions">
       <button class="actions" @click="back">Wrong Number?</button>
@@ -123,8 +124,8 @@ export default {
   min-width: 85px;
 }
 .next {
-  color: #003CFF;
-  background: #EDF1FF;
+  color: #003cff;
+  background: #edf1ff;
 }
 
 .std {
@@ -133,6 +134,6 @@ export default {
   font-size: 13px;
 }
 .std span {
-  color: #003CFF
+  color: #003cff;
 }
 </style>

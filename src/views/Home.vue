@@ -1,10 +1,14 @@
 <template>
   <div>
-    <div id="avatar"></div>
-    <h3>
-      Welcome {{ this.userInfo.user_firstname }}
-      {{ this.userInfo.user_lastname }}
-    </h3>
+    <div class="topper">
+      <div>
+        <div id="avatar"></div>
+        <h3>
+          Welcome {{ this.userInfo.user_firstname }}
+          {{ this.userInfo.user_lastname }}
+        </h3>
+      </div>
+    </div>
     <div class="section">
       <h4>Privacy & Personalization</h4>
       <p>choose what activity is saved to personalize your Myren experience!</p>
@@ -54,13 +58,19 @@ export default {
 }
 </script>
 <style scoped>
+.topper {
+  height: 30vh;
+  display: flex;
+  place-content: center;
+  place-items: center;
+}
 h3 {
   text-align: center;
   margin-top: 16px;
   margin-bottom: 16px;
 }
 .section {
-  margin: 32px 16px;
+  margin: 0 16px 26px 16px;
   border: 0.01rem solid #d6d6d6;
   padding: 10px 16px;
   border-radius: 12px;
