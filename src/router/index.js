@@ -42,14 +42,6 @@ const routes = [
     }
   },
   {
-    path: '/welcome',
-    name: 'Welcome',
-    component: () => import('../views/Welcome.vue'),
-    meta: {
-      title: 'Myren | Welcome'
-    }
-  },
-  {
     path: '/signin',
     name: 'Signin',
     component: () => import('../views/Signin.vue'),
@@ -71,14 +63,6 @@ const routes = [
     component: () => import('../views/Data.vue'),
     meta: {
       title: 'Myren | Your Data'
-    }
-  },
-  {
-    path: '/intro',
-    name: 'Intro',
-    component: () => import('../views/Intro.vue'),
-    meta: {
-      title: 'Myren | Introduction'
     }
   }
 ]
