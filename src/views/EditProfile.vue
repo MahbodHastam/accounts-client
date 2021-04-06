@@ -1,7 +1,7 @@
 <template>
   <div class="profile">
     <div class="topper">
-      <h4>Verify</h4>
+      <h4>Edit Profile</h4>
     </div>
     <p>
       Complete your profile, minimum info needed are your firstname and
