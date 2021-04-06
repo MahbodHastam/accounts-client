@@ -68,11 +68,20 @@
         </div>
       </div>
     </div>
+
+    <div class="bottom-actions">
+      <button class="actions">Privacy</button>
+      <button class="actions next" @click="save">Save</button>
+    </div>
   </div>
 </template>
 <script>
 export default {
-  methods: {},
+  methods: {
+    save() {
+      console.log('save');
+    }
+  },
   data: function() {
     return {
       audiofyHistory: true,
@@ -88,7 +97,7 @@ export default {
 .section {
   margin: 32px 16px;
   border: 0.01rem solid #d6d6d6;
-  padding: 10px 16px;
+  padding: 16px;
   border-radius: 12px;
 }
 .boxes {
@@ -126,5 +135,33 @@ export default {
 }
 .innerActive {
   transform: translateX(32px);
+}
+
+.bottom-actions {
+  position: absolute;
+  bottom: 8px;
+  width: calc(100vw - 32px);
+  margin-left: 16px;
+  display: flex;
+  justify-content: space-between;
+}
+.actions {
+  border: none;
+  outline: none;
+  font-size: 16px;
+  background: none;
+  height: 48px;
+  padding: 15px 26px;
+  border-radius: 24px;
+  display: flex;
+  place-content: center;
+  place-items: center;
+  font-family: 'Mullish', sans-serif;
+  font-weight: bold;
+  min-width: 85px;
+}
+.next {
+  color: #003cff;
+  background: #edf1ff;
 }
 </style>
