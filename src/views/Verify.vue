@@ -12,7 +12,7 @@
     <div class="inputs">
       <input
         type="tel"
-        placeholder=" ------"
+        placeholder="------"
         v-model="code"
         id="code"
         maxlength="6"
@@ -51,7 +51,23 @@ export default {
         .then(response => {
           console.log(response)
           if (response.data.ok) {
-            self.$router.push('completeprofile')
+
+            //get name and last name if it has default value route to editprofile
+            axios
+              .get('https://accounts.myren.xyz/api/v1/getProfile', {
+                withCredentials: true
+              })
+              .then(response => {
+                //   console.log(response.data)
+                if (response.data.user_firstname == "Guest" && response.data.user_lastname == "User") {
+                  self.$router.push('completeprofile')
+                } else {
+                  self.$router.push('/')
+                }
+              })
+              .catch(error => console.log(error))
+              .then(() => {})
+            
           }
         })
         .catch(error => console.log(error))
