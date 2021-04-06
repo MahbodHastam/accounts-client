@@ -30,18 +30,6 @@ const routes = [
     }
   },
   {
-    path: '/profile',
-    name: 'Profile',
-    component: () => import('../views/Profile.vue'),
-    // beforeEnter: (to, from, next) => {
-    //   if (from.name !== 'Home') next({ name: 'Home' })
-    //   else next()
-    // }
-    meta: {
-      title: 'Myren | Profile'
-    }
-  },
-  {
     path: '/signin',
     name: 'Signin',
     component: () => import('../views/Signin.vue'),
