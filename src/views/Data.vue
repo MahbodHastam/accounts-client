@@ -76,10 +76,27 @@
   </div>
 </template>
 <script>
+import axios from "axios"
+
 export default {
   methods: {
     save() {
-      console.log('save');
+      var self = this
+      axios
+        .get(
+          `https://accounts.myren.xyz/api/v1/updateSettings?audiofy_history=${String(self.audiofyHistory)}&vidible_history=${String(self.vidibleHistory)}&show_ads=${String(self.showAds)}&ads_personalization=${String(self.adPersonalization)}&ads_earnings=${String(self.adsEarnings)}`,
+          { withCredentials: true }
+        )
+        .then(response => {
+          console.log(response)
+          if (response.data.ok) {
+            console.log('done!')
+            //go to show all products!
+            self.$router.push('/')
+          }
+        })
+        .catch(error => console.log(error))
+        .then()
     }
   },
   data: function() {
