@@ -14,7 +14,15 @@
         A fair place for both users and artists! buy and sell tracks without
         limitations from everywhere in the world!
       </p>
-      <router-link to="/data">see more >></router-link>
+      <a href="https://audiofy.myren.xyz/">open Audiofy >></a>
+    </div>
+    <div class="section dis">
+      <h4>Vidible</h4>
+      <p>
+        A fair place for both users and creators! watch and create, earn from
+        ads without limitations from everywhere in the world!
+      </p>
+      <a href="https://audiofy.myren.xyz/">open Audiofy >></a>
     </div>
   </div>
 </template>
@@ -35,6 +43,9 @@ h3 {
   border: 0.01rem solid #d6d6d6;
   padding: 10px 16px;
   border-radius: 12px;
+}
+.dis {
+  opacity: 0.5;
 }
 p {
   margin-top: 10px;
