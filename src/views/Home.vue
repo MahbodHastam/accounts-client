@@ -9,6 +9,12 @@
         </h3>
       </div>
     </div>
+
+    <div class="section">
+      <h4>Our Products</h4>
+      <p>Here you can find all Myren products that are available!</p>
+      <router-link to="/services">see more >></router-link>
+    </div>
     <div class="section">
       <h4>Privacy & Personalization</h4>
       <p>choose what activity is saved to personalize your Myren experience!</p>

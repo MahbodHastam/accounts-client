@@ -52,6 +52,14 @@ const routes = [
     meta: {
       title: 'Myren | Your Data'
     }
+  },
+  {
+    path: '/services',
+    name: 'Services',
+    component: () => import('../views/Services.vue'),
+    meta: {
+      title: 'Myren | All of Myren Products'
+    }
   }
 ]
 
