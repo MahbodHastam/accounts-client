@@ -22,7 +22,7 @@
         A fair place for both users and creators! watch and create, earn from
         ads without limitations from everywhere in the world!
       </p>
-      <a href="https://audiofy.myren.xyz/">open Audiofy >></a>
+      <a href="https://vidible.myren.xyz/">open Vidible >></a>
     </div>
   </div>
 </template>
