@@ -66,7 +66,7 @@
     </div>
 
     <div class="bottom-actions">
-      <button class="actions">Privacy</button>
+      <button class="actions" @click="back">Back</button>
       <button class="actions next" @click="save">Save</button>
     </div>
   </div>
@@ -116,6 +116,9 @@ export default {
       if (this.showAds) {
         this.adPersonalization = !this.adPersonalization
       }
+    },
+    back() {
+      this.$router.push('/')
     }
   },
   data: function() {
