@@ -2,13 +2,13 @@
   <div id="app">
     <div id="nav">
       <div class="nav-item">
-        <ion-icon name="menu-outline"></ion-icon>
+        <!-- <ion-icon name="menu-outline"></ion-icon> -->
       </div>
       <div class="nav-item">
         <h2>ACCOUNTS</h2>
       </div>
       <div class="nav-item">
-        <ion-icon name="person-circle-outline"></ion-icon>
+        <!-- <ion-icon name="person-circle-outline"></ion-icon> -->
       </div>
     </div>
     <router-view />
