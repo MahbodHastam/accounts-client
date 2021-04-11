@@ -33,11 +33,7 @@
       <h4>Ad Settings</h4>
       <div class="boxes">
         <p>Show Ads</p>
-        <div
-          class="check"
-          :class="{ active: showAds }"
-          @click="showAds = !showAds"
-        >
+        <div class="check" :class="{ active: showAds }" @click="changeShowAds">
           <div :class="{ innerActive: showAds }" class="check-inner"></div>
         </div>
       </div>
@@ -46,7 +42,7 @@
         <div
           class="check"
           :class="{ active: adPersonalization && showAds }"
-          @click="adPersonalization = !adPersonalization"
+          @click="changeAdsPersonalization"
         >
           <div
             :class="{ innerActive: adPersonalization && showAds }"
@@ -59,7 +55,7 @@
         <div
           class="check"
           :class="{ active: adsEarnings && showAds }"
-          @click="adsEarnings = !adsEarnings"
+          @click="changeAdsEarnings"
         >
           <div
             :class="{ innerActive: adsEarnings && showAds }"
@@ -97,6 +93,23 @@ export default {
         })
         .catch(error => console.log(error))
         .then()
+    },
+    changeShowAds() {
+      this.showAds = !this.showAds
+      if (this.showAds == false) {
+        this.adPersonalization = false
+        this.adsEarnings = false
+      }
+    },
+    changeAdsEarnings() {
+      if (this.showAds) {
+        this.adsEarnings = !this.adsEarnings
+      }
+    },
+    changeAdsPersonalization() {
+      if (this.showAds) {
+        this.adPersonalization = !this.adPersonalization
+      }
     }
   },
   data: function() {
