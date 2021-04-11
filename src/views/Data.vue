@@ -72,7 +72,7 @@
   </div>
 </template>
 <script>
-import axios from "axios"
+import axios from 'axios'
 
 export default {
   methods: {
@@ -80,7 +80,13 @@ export default {
       var self = this
       axios
         .get(
-          `https://accounts.myren.xyz/api/v1/updateSettings?audiofy_history=${String(self.audiofyHistory)}&vidible_history=${String(self.vidibleHistory)}&show_ads=${String(self.showAds)}&ads_personalization=${String(self.adPersonalization)}&ads_earnings=${String(self.adsEarnings)}`,
+          `https://accounts.myren.xyz/api/v1/updateSettings?audiofy_history=${String(
+            self.audiofyHistory
+          )}&vidible_history=${String(self.vidibleHistory)}&show_ads=${String(
+            self.showAds
+          )}&ads_personalization=${String(
+            self.adPersonalization
+          )}&ads_earnings=${String(self.adsEarnings)}`,
           { withCredentials: true }
         )
         .then(response => {
