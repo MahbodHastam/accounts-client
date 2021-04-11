@@ -14,7 +14,7 @@
       <p>choose what activity is saved to personalize your Myren experience!</p>
       <router-link to="/data">see more >></router-link>
     </div>
-    <div class="section">
+    <div class="section dis">
       <h4>We value your security</h4>
       <p>
         The security service is designed to give you personalized
@@ -100,5 +100,8 @@ a {
   font-weight: bold;
   font-family: 'Poppins';
   color: rgb(0, 60, 255);
+}
+.dis {
+  opacity: 0.5;
 }
 </style>
