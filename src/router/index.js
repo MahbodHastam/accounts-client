@@ -60,6 +60,14 @@ const routes = [
     meta: {
       title: 'Myren | All of Myren Products'
     }
+  },
+  {
+    path: '/intro',
+    name: 'Intro',
+    component: () => import('../views/Intro.vue'),
+    meta: {
+      title: 'Myren | an Intro!'
+    }
   }
 ]
 
