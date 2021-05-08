@@ -51,7 +51,6 @@ export default {
         .then(response => {
           console.log(response)
           if (response.data.ok) {
-
             //get name and last name if it has default value route to editprofile
             axios
               .get('https://accounts.myren.xyz/api/v1/getProfile', {
