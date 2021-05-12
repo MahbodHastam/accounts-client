@@ -54,7 +54,8 @@ export default {
         if (response.data.ok) {
           self.$store.commit('updateUserInfo', response.data)
         } else {
-          self.$router.push('/intro')
+          // self.$router.push('/intro')
+          self.$router.push('/signin')
         }
         //   self.$store.state
       })
