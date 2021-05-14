@@ -16,6 +16,7 @@
         v-model="code"
         id="code"
         maxlength="6"
+        autocomplete="off"
       />
 
       <p class="std">Didn't Received Yet? <span>Request Again</span></p>
