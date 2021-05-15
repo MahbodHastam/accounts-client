@@ -20,7 +20,9 @@
         autocomplete="off"
       />
 
-      <p class="std">Didn't Received Yet? <span @click="requestAgain">Request Again</span></p>
+      <p class="std">
+        Didn't Received Yet? <span @click="requestAgain">Request Again</span>
+      </p>
     </div>
     <div class="bottom-actions">
       <button class="actions" @click="back">Wrong Number?</button>
