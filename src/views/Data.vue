@@ -123,11 +123,11 @@ export default {
   },
   data: function() {
     return {
-      audiofyHistory: true,
-      vidibleHistory: true,
-      showAds: true,
-      adPersonalization: true,
-      adsEarnings: false
+      audiofyHistory: this.$store.state.userInfo.audiofy_history,
+      vidibleHistory: this.$store.state.userInfo.vidible_history,
+      showAds: this.$store.state.userInfo.show_ads,
+      adPersonalization: this.$store.state.userInfo.ads_personalization,
+      adsEarnings: this.$store.state.userInfo.ads_earnings
     }
   }
 }
