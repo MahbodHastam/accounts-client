@@ -5,8 +5,9 @@
     </div>
 
     <p>
-      Verification code has been sent to you, please check it and enter it in
-      input below and make sure you are not entering it wrong.
+      Verification code has been sent to {{ this.$store.state.phoneNumber }},
+      please check it and enter it in input below and make sure you are not
+      entering it wrong.
     </p>
 
     <div class="inputs">
@@ -19,7 +20,7 @@
         autocomplete="off"
       />
 
-      <p class="std">Didn't Received Yet? <span>Request Again</span></p>
+      <p class="std">Didn't Received Yet? <span @click="requestAgain">Request Again</span></p>
     </div>
     <div class="bottom-actions">
       <button class="actions" @click="back">Wrong Number?</button>
@@ -77,6 +78,18 @@ export default {
     },
     back() {
       this.$router.push('/signin')
+    },
+    requestAgain() {
+      axios
+        .get(
+          `https://accounts.myren.xyz/api/v1/generateCode?phone_number=${this.$store.state.phoneNumber}`,
+          { withCredentials: true }
+        )
+        .then(response => {
+          console.log(response)
+        })
+        .catch(error => console.log(error))
+        .then()
     }
   }
 }

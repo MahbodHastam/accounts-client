@@ -40,7 +40,6 @@ export default {
           console.log(response)
           if (response.data.ok) {
             console.log('done!')
-            //go to show all products!
             self.$router.push('/')
           }
         })
