@@ -120,7 +120,9 @@ export default {
         .get(
           `https://accounts.myren.xyz/api/v1/updateSettings?audiofy_history=${String(
             self.userInfo.audiofy_history
-          )}&vidible_history=${String(self.userInfo.vidible_history)}&show_ads=${String(
+          )}&vidible_history=${String(
+            self.userInfo.vidible_history
+          )}&show_ads=${String(
             self.userInfo.show_ads
           )}&ads_personalization=${String(
             self.userInfo.ads_personalization
