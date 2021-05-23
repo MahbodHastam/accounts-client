@@ -1,6 +1,9 @@
 <template>
   <div class="data">
     <div class="borders">
+      <div class="topper">
+        <h4>Sign In</h4>
+      </div>
       <div class="section">
         <h4>Activity Control</h4>
         <div class="boxes">
@@ -139,6 +142,16 @@ export default {
 }
 </script>
 <style scoped>
+.topper {
+  height: 30vh;
+  display: flex;
+  place-content: center;
+  place-items: center;
+}
+.topper h4 {
+  font-size: 22px;
+  font-weight: bold;
+}
 .section {
   margin: 32px 16px;
   border: 0.01rem solid #d6d6d6;
