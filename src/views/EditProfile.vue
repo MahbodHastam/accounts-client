@@ -82,8 +82,8 @@ input {
 }
 
 .bottom-actions {
-  position: absolute;
-  bottom: 8px;
+  /* position: absolute; */
+  margin-top: 32px;
   width: calc(100vw - 32px);
   display: flex;
   justify-content: space-between;

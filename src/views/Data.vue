@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="data">
     <div class="section">
       <h4>Activity Control</h4>
       <div class="boxes">
@@ -177,8 +177,8 @@ export default {
 }
 
 .bottom-actions {
-  position: absolute;
-  bottom: 8px;
+  /* position: absolute; */
+  margin-top: 16px;
   width: calc(100vw - 32px);
   margin-left: 16px;
   display: flex;
