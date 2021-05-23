@@ -10,11 +10,11 @@
           <p>Audiofy History</p>
           <div
             class="check"
-            :class="{ active: audiofyHistory }"
-            @click="audiofyHistory = !audiofyHistory"
+            :class="{ active: userInfo.audiofy_history }"
+            @click="userInfo.audiofy_history = !userInfo.audiofy_history"
           >
             <div
-              :class="{ innerActive: audiofyHistory }"
+              :class="{ innerActive: userInfo.audiofy_history }"
               class="check-inner"
             ></div>
           </div>
@@ -23,11 +23,11 @@
           <p>Vidible History</p>
           <div
             class="check"
-            :class="{ active: vidibleHistory }"
-            @click="vidibleHistory = !vidibleHistory"
+            :class="{ active: userInfo.vidible_history }"
+            @click="userInfo.vidible_history = !userInfo.vidible_history"
           >
             <div
-              :class="{ innerActive: vidibleHistory }"
+              :class="{ innerActive: userInfo.vidible_history }"
               class="check-inner"
             ></div>
           </div>
@@ -39,21 +39,28 @@
           <p>Show Ads</p>
           <div
             class="check"
-            :class="{ active: showAds }"
+            :class="{ active: userInfo.show_ads }"
             @click="changeShowAds"
           >
-            <div :class="{ innerActive: showAds }" class="check-inner"></div>
+            <div
+              :class="{ innerActive: userInfo.show_ads }"
+              class="check-inner"
+            ></div>
           </div>
         </div>
         <div class="boxes">
           <p>Ads Personalization</p>
           <div
             class="check"
-            :class="{ active: adPersonalization && showAds }"
+            :class="{
+              active: userInfo.ads_personalization && userInfo.show_ads
+            }"
             @click="changeAdsPersonalization"
           >
             <div
-              :class="{ innerActive: adPersonalization && showAds }"
+              :class="{
+                innerActive: userInfo.ads_personalization && userInfo.show_ads
+              }"
               class="check-inner"
             ></div>
           </div>
@@ -62,11 +69,13 @@
           <p>Ads Earnings</p>
           <div
             class="check"
-            :class="{ active: adsEarnings && showAds }"
+            :class="{ active: userInfo.ads_earnings && userInfo.show_ads }"
             @click="changeAdsEarnings"
           >
             <div
-              :class="{ innerActive: adsEarnings && showAds }"
+              :class="{
+                innerActive: userInfo.ads_earnings && userInfo.show_ads
+              }"
               class="check-inner"
             ></div>
           </div>
@@ -82,20 +91,40 @@
 </template>
 <script>
 import axios from 'axios'
-
+import { mapState } from 'vuex'
 export default {
+  computed: mapState(['userInfo']),
+  beforeCreate() {
+    var self = this
+    axios
+      .get('https://accounts.myren.xyz/api/v1/getProfile', {
+        withCredentials: true
+      })
+      .then(response => {
+        //   console.log(response.data)
+        if (response.data.ok) {
+          self.$store.commit('updateUserInfo', response.data)
+        } else {
+          // self.$router.push('/intro')
+          self.$router.push('/signin')
+        }
+        //   self.$store.state
+      })
+      .catch(error => console.log(error))
+      .then(() => {})
+  },
   methods: {
     save() {
       var self = this
       axios
         .get(
           `https://accounts.myren.xyz/api/v1/updateSettings?audiofy_history=${String(
-            self.audiofyHistory
-          )}&vidible_history=${String(self.vidibleHistory)}&show_ads=${String(
-            self.showAds
+            self.userInfo.audiofy_history
+          )}&vidible_history=${String(self.userInfo.vidible_history)}&show_ads=${String(
+            self.userInfo.show_ads
           )}&ads_personalization=${String(
-            self.adPersonalization
-          )}&ads_earnings=${String(self.adsEarnings)}`,
+            self.userInfo.ads_personalization
+          )}&ads_earnings=${String(self.userInfo.ads_earnings)}`,
           { withCredentials: true }
         )
         .then(response => {
@@ -110,33 +139,24 @@ export default {
         .then()
     },
     changeShowAds() {
-      this.showAds = !this.showAds
-      if (this.showAds == false) {
-        this.adPersonalization = false
-        this.adsEarnings = false
+      this.userInfo.show_ads = !this.userInfo.show_ads
+      if (this.userInfo.show_ads == false) {
+        this.userInfo.ads_personalization = false
+        this.userInfo.ads_earnings = false
       }
     },
     changeAdsEarnings() {
-      if (this.showAds) {
-        this.adsEarnings = !this.adsEarnings
+      if (this.userInfo.show_ads) {
+        this.userInfo.ads_earnings = !this.userInfo.ads_earnings
       }
     },
     changeAdsPersonalization() {
-      if (this.showAds) {
-        this.adPersonalization = !this.adPersonalization
+      if (this.userInfo.show_ads) {
+        this.userInfo.ads_personalization = !this.userInfo.ads_personalization
       }
     },
     back() {
       this.$router.push('/')
-    }
-  },
-  data: function() {
-    return {
-      audiofyHistory: this.$store.state.userInfo.audiofy_history,
-      vidibleHistory: this.$store.state.userInfo.vidible_history,
-      showAds: this.$store.state.userInfo.show_ads,
-      adPersonalization: this.$store.state.userInfo.ads_personalization,
-      adsEarnings: this.$store.state.userInfo.ads_earnings
     }
   }
 }
