@@ -3,7 +3,9 @@
     <div class="borders">
       <div class="inputs">
         <select v-model="prefix" name="country" id="country-code" required>
-          <option value="+" disabled hidden selected>Select Your Country</option>
+          <option value="+" disabled hidden selected
+            >Select Your Country</option
+          >
           <option value="+98">IRI (+98)</option>
           <option value="+1">US (+1)</option>
         </select>
@@ -60,7 +62,7 @@ export default {
 </script>
 
 <style scoped>
-.borders{
+.borders {
   width: 100%;
 }
 #country-code {
@@ -134,5 +136,4 @@ export default {
   color: #003cff;
   background: #edf1ff;
 }
-
 </style>
