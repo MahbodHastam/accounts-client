@@ -34,7 +34,11 @@
         <h4>Ad Settings</h4>
         <div class="boxes">
           <p>Show Ads</p>
-          <div class="check" :class="{ active: showAds }" @click="changeShowAds">
+          <div
+            class="check"
+            :class="{ active: showAds }"
+            @click="changeShowAds"
+          >
             <div :class="{ innerActive: showAds }" class="check-inner"></div>
           </div>
         </div>
