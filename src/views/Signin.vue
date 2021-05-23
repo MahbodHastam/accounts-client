@@ -1,9 +1,11 @@
 <template>
   <div class="home">
-    <div class="topper">
-      <h4>Sign In</h4>
+    <div class="borders">
+      <div class="topper">
+        <h4>Sign In</h4>
+      </div>
+      <Login />
     </div>
-    <Login />
   </div>
 </template>
 
@@ -32,5 +34,14 @@ export default {
 }
 .home {
   padding: 16px !important;
+}
+.borders {
+  width: 100%;
+}
+@media screen and (min-width: 500px){
+  .borders {
+    width: 500px;
+    margin: 0 auto;
+  }
 }
 </style>

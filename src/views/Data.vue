@@ -1,73 +1,75 @@
 <template>
   <div class="data">
-    <div class="section">
-      <h4>Activity Control</h4>
-      <div class="boxes">
-        <p>Audiofy History</p>
-        <div
-          class="check"
-          :class="{ active: audiofyHistory }"
-          @click="audiofyHistory = !audiofyHistory"
-        >
+    <div class="borders">
+      <div class="section">
+        <h4>Activity Control</h4>
+        <div class="boxes">
+          <p>Audiofy History</p>
           <div
-            :class="{ innerActive: audiofyHistory }"
-            class="check-inner"
-          ></div>
+            class="check"
+            :class="{ active: audiofyHistory }"
+            @click="audiofyHistory = !audiofyHistory"
+          >
+            <div
+              :class="{ innerActive: audiofyHistory }"
+              class="check-inner"
+            ></div>
+          </div>
         </div>
-      </div>
-      <div class="boxes">
-        <p>Vidible History</p>
-        <div
-          class="check"
-          :class="{ active: vidibleHistory }"
-          @click="vidibleHistory = !vidibleHistory"
-        >
+        <div class="boxes">
+          <p>Vidible History</p>
           <div
-            :class="{ innerActive: vidibleHistory }"
-            class="check-inner"
-          ></div>
+            class="check"
+            :class="{ active: vidibleHistory }"
+            @click="vidibleHistory = !vidibleHistory"
+          >
+            <div
+              :class="{ innerActive: vidibleHistory }"
+              class="check-inner"
+            ></div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="section">
-      <h4>Ad Settings</h4>
-      <div class="boxes">
-        <p>Show Ads</p>
-        <div class="check" :class="{ active: showAds }" @click="changeShowAds">
-          <div :class="{ innerActive: showAds }" class="check-inner"></div>
+      <div class="section">
+        <h4>Ad Settings</h4>
+        <div class="boxes">
+          <p>Show Ads</p>
+          <div class="check" :class="{ active: showAds }" @click="changeShowAds">
+            <div :class="{ innerActive: showAds }" class="check-inner"></div>
+          </div>
         </div>
-      </div>
-      <div class="boxes">
-        <p>Ads Personalization</p>
-        <div
-          class="check"
-          :class="{ active: adPersonalization && showAds }"
-          @click="changeAdsPersonalization"
-        >
+        <div class="boxes">
+          <p>Ads Personalization</p>
           <div
-            :class="{ innerActive: adPersonalization && showAds }"
-            class="check-inner"
-          ></div>
+            class="check"
+            :class="{ active: adPersonalization && showAds }"
+            @click="changeAdsPersonalization"
+          >
+            <div
+              :class="{ innerActive: adPersonalization && showAds }"
+              class="check-inner"
+            ></div>
+          </div>
         </div>
-      </div>
-      <div class="boxes">
-        <p>Ads Earnings</p>
-        <div
-          class="check"
-          :class="{ active: adsEarnings && showAds }"
-          @click="changeAdsEarnings"
-        >
+        <div class="boxes">
+          <p>Ads Earnings</p>
           <div
-            :class="{ innerActive: adsEarnings && showAds }"
-            class="check-inner"
-          ></div>
+            class="check"
+            :class="{ active: adsEarnings && showAds }"
+            @click="changeAdsEarnings"
+          >
+            <div
+              :class="{ innerActive: adsEarnings && showAds }"
+              class="check-inner"
+            ></div>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="bottom-actions">
-      <button class="actions" @click="back">Back</button>
-      <button class="actions next" @click="save">Save</button>
+      <div class="bottom-actions">
+        <button class="actions" @click="back">Back</button>
+        <button class="actions next" @click="save">Save</button>
+      </div>
     </div>
   </div>
 </template>
@@ -179,7 +181,7 @@ export default {
 .bottom-actions {
   /* position: absolute; */
   margin-top: 16px;
-  width: calc(100vw - 32px);
+  width: calc(100% - 32px);
   margin-left: 16px;
   display: flex;
   justify-content: space-between;
@@ -202,5 +204,14 @@ export default {
 .next {
   color: #003cff;
   background: #edf1ff;
+}
+.borders {
+  width: 100%;
+}
+@media screen and (min-width: 500px){
+  .borders {
+    width: 500px;
+    margin: 0 auto;
+  }
 }
 </style>

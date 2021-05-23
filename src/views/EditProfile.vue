@@ -1,20 +1,22 @@
 <template>
   <div class="profile">
-    <div class="topper">
-      <h4>Edit Profile</h4>
-    </div>
-    <p>
-      Complete your profile, minimum info needed are your firstname and
-      lastname.
-    </p>
-    <span>Firstname</span>
-    <input type="text" placeholder="example: Mehrdad" v-model="firstName" />
-    <span>Lastname</span>
-    <input type="text" placeholder="example: Akbari" v-model="lastName" />
+    <div class="borders">
+      <div class="topper">
+        <h4>Edit Profile</h4>
+      </div>
+      <p>
+        Complete your profile, minimum info needed are your firstname and
+        lastname.
+      </p>
+      <span>Firstname</span>
+      <input type="text" placeholder="example: Mehrdad" v-model="firstName" />
+      <span>Lastname</span>
+      <input type="text" placeholder="example: Akbari" v-model="lastName" />
 
-    <div class="bottom-actions">
-      <button class="actions">Privacy</button>
-      <button class="actions next" @click="complete">Save</button>
+      <div class="bottom-actions">
+        <button class="actions">Privacy</button>
+        <button class="actions next" @click="complete">Save</button>
+      </div>
     </div>
   </div>
 </template>
@@ -84,7 +86,7 @@ input {
 .bottom-actions {
   /* position: absolute; */
   margin-top: 32px;
-  width: calc(100vw - 32px);
+  width: calc(100% - 32px);
   display: flex;
   justify-content: space-between;
 }
@@ -112,5 +114,14 @@ span {
   font-family: 'Mulish', sans-serif;
   font-size: 12px;
   transform: translate(15px, 10px);
+}
+.borders {
+  width: 100%;
+}
+@media screen and (min-width: 500px){
+  .borders {
+    width: 500px;
+    margin: 0 auto;
+  }
 }
 </style>

@@ -1,24 +1,26 @@
 <template>
   <div class="login-cmp-wrapper">
-    <div class="inputs">
-      <select v-model="prefix" name="country" id="country-code" required>
-        <option value="+" disabled hidden selected>Select Your Country</option>
-        <option value="+98">IRI (+98)</option>
-        <option value="+1">US (+1)</option>
-      </select>
-      <p id="code-model">{{ prefix }}</p>
-      <input
-        type="tel"
-        placeholder="example: 9920800113"
-        v-model="phoneNumber"
-        id="phone-number"
-      />
-    </div>
+    <div class="borders">
+      <div class="inputs">
+        <select v-model="prefix" name="country" id="country-code" required>
+          <option value="+" disabled hidden selected>Select Your Country</option>
+          <option value="+98">IRI (+98)</option>
+          <option value="+1">US (+1)</option>
+        </select>
+        <p id="code-model">{{ prefix }}</p>
+        <input
+          type="tel"
+          placeholder="example: 9920800113"
+          v-model="phoneNumber"
+          id="phone-number"
+        />
+      </div>
 
-    <!-- for going back and help -->
-    <div class="bottom-actions">
-      <button class="actions">Help</button>
-      <button class="actions next" @click="next">Next</button>
+      <!-- for going back and help -->
+      <div class="bottom-actions">
+        <button class="actions">Help</button>
+        <button class="actions next" @click="next">Next</button>
+      </div>
     </div>
   </div>
 </template>
@@ -58,6 +60,9 @@ export default {
 </script>
 
 <style scoped>
+.borders{
+  width: 100%;
+}
 #country-code {
   padding: 10px;
   border: none;
@@ -106,7 +111,7 @@ export default {
 .bottom-actions {
   /* position: absolute; */
   margin-top: 16px;
-  width: calc(100vw - 32px);
+  width: calc(100% - 32px);
   display: flex;
   justify-content: space-between;
 }
@@ -129,4 +134,5 @@ export default {
   color: #003cff;
   background: #edf1ff;
 }
+
 </style>

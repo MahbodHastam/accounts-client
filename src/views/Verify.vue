@@ -1,32 +1,34 @@
 <template>
   <div class="verify">
-    <div class="topper">
-      <h4>Verify</h4>
-    </div>
+    <div class="borders">
+      <div class="topper">
+        <h4>Verify</h4>
+      </div>
 
-    <p>
-      Verification code has been sent to {{ this.$store.state.phoneNumber }},
-      please check it and enter it in input below and make sure you are not
-      entering it wrong.
-    </p>
-
-    <div class="inputs">
-      <input
-        type="tel"
-        placeholder="------"
-        v-model="code"
-        id="code"
-        maxlength="6"
-        autocomplete="off"
-      />
-
-      <p class="std">
-        Didn't Received Yet? <span @click="requestAgain">Request Again</span>
+      <p>
+        Verification code has been sent to {{ this.$store.state.phoneNumber }},
+        please check it and enter it in input below and make sure you are not
+        entering it wrong.
       </p>
-    </div>
-    <div class="bottom-actions">
-      <button class="actions" @click="back">Wrong Number?</button>
-      <button class="actions next" @click="next">Next</button>
+
+      <div class="inputs">
+        <input
+          type="tel"
+          placeholder="------"
+          v-model="code"
+          id="code"
+          maxlength="6"
+          autocomplete="off"
+        />
+
+        <p class="std">
+          Didn't Received Yet? <span @click="requestAgain">Request Again</span>
+        </p>
+      </div>
+      <div class="bottom-actions">
+        <button class="actions" @click="back">Wrong Number?</button>
+        <button class="actions next" @click="next">Next</button>
+      </div>
     </div>
   </div>
 </template>
@@ -137,7 +139,7 @@ export default {
 .bottom-actions {
   /* position: absolute; */
   margin-top: 16px;
-  width: calc(100vw - 32px);
+  width: calc(100% - 32px);
   display: flex;
   justify-content: space-between;
 }
@@ -168,5 +170,14 @@ export default {
 }
 .std span {
   color: #003cff;
+}
+.borders {
+  width: 100%;
+}
+@media screen and (min-width: 500px){
+  .borders {
+    width: 500px;
+    margin: 0 auto;
+  }
 }
 </style>
