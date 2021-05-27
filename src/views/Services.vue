@@ -14,7 +14,7 @@
         Blockchain services and products in a nutshell! NLP, Copy-Trader,
         Algorithmic bots for a wise financial freedom!
       </p>
-      <a href="https://zarrrin.myren.xyz/">open Audiofy >></a>
+      <a href="https://zarrrin.myren.xyz/">open Zarrrin >></a>
     </div>
     <div class="section">
       <h4>Audiofy</h4>
