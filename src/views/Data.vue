@@ -2,7 +2,7 @@
   <div class="data">
     <div class="borders">
       <div class="topper">
-        <h4>Privact and Personalization</h4>
+        <h4>Privacy and Personalization</h4>
       </div>
       <div class="section">
         <h4>Activity Control</h4>
