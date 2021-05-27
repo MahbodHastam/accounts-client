@@ -9,6 +9,14 @@
       </div>
     </div>
     <div class="section">
+      <h4>Zarrrin</h4>
+      <p>
+        Blockchain services and products in a nutshell! NLP, Copy-Trader,
+        Algorithmic bots for a wise financial freedom!
+      </p>
+      <a href="https://zarrrin.myren.xyz/">open Audiofy >></a>
+    </div>
+    <div class="section">
       <h4>Audiofy</h4>
       <p>
         A fair place for both users and artists! buy and sell tracks without
