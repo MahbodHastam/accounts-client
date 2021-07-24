@@ -31,6 +31,7 @@ export default {
   border-radius: 24px;
   margin: 8px 0;
   font-size: 11pt;
+  font-family: 'Mulish', sans-serif;
 }
 
 .alert-danger {
