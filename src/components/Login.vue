@@ -57,8 +57,9 @@ export default {
   methods: {
     validateInputs() {
       const isValid =
-        (this.prefix === '+98' || this.prefix === '+') &&
-        new RegExp('^(\\98|0)?9\\d{9}$').test(this.phoneNumber)
+        this.prefix === '+98' || this.prefix === '+'
+          ? new RegExp('^(\\98|0)?9\\d{9}$').test(this.phoneNumber)
+          : false
 
       if (!isValid) {
         this.errors.phoneNumber.message = 'Your phone-number is incorrect.'
