@@ -16,6 +16,13 @@
           v-model="phoneNumber"
           id="phone-number"
         />
+        <alert
+          v-for="(error, index) in errors"
+          :key="index"
+          v-show="error.message"
+          :message="error.message"
+          type="danger"
+        />
       </div>
 
       <!-- for going back and help -->
@@ -28,15 +35,47 @@
 </template>
 
 <script>
-const axios = require('axios')
+import Alert from './Alert.vue'
+import axios from 'axios'
+
 export default {
+  components: {
+    Alert
+  },
+
   data() {
     return {
       prefix: '+',
-      phoneNumber: null
+      phoneNumber: null,
+      errors: {
+        phoneNumber: { message: false },
+        prefix: { message: false }
+      }
     }
   },
+
   methods: {
+    validateInputs() {
+      const isValid =
+        this.prefix === '+98' || this.prefix === '+'
+          ? new RegExp('^(\\98|0)?9\\d{9}$').test(this.phoneNumber)
+          : false
+
+      if (!isValid) {
+        this.errors.phoneNumber.message = 'Your phone-number is incorrect.'
+
+        return false
+      } else this.errors.phoneNumber.message = false
+
+      if (this.prefix === '+') {
+        this.errors.prefix.message = 'Please select your country.'
+
+        return false
+      } else this.errors.prefix.message = false
+
+      return true
+    },
+
     next() {
       var self = this
       var url =
@@ -44,6 +83,9 @@ export default {
         this.prefix.substring(1) +
         this.phoneNumber
       console.log(url)
+
+      if (!this.validateInputs()) return null
+
       axios
         .get(url, { withCredentials: true })
         .then(response => {
