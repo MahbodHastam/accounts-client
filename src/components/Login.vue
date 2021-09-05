@@ -7,7 +7,7 @@
           :default="'IRI (+98)'"
           @selectedOption="prefix = $event"
         />
-        <p id="code-model">{{ prefixCode }}</p>
+        <p id="code-model">{{ this.getPrefix() }}</p>
         <input
           type="tel"
           placeholder="example: 9920800113"
@@ -46,7 +46,6 @@ export default {
   data() {
     return {
       prefix: '+98',
-      prefixCode: '+98',
       phoneNumber: null,
       errors: {
         phoneNumber: { message: false },
@@ -55,16 +54,10 @@ export default {
     }
   },
 
-  watch: {
-    prefix: function() {
-      this.prefixCode = this.getPrefix()
-    }
-  },
-
   methods: {
     validateInputs() {
       const isValid =
-        this.getPrefix() === '+98' || this.getPrefix() === '+'
+        this.getPrefix() === '+98'
           ? new RegExp('^(\\98|0)?9\\d{9}$').test(this.phoneNumber)
           : false
 
@@ -74,7 +67,7 @@ export default {
         return false
       } else this.errors.phoneNumber.message = false
 
-      if (this.getPrefix() === '+') {
+      if (this.getPrefix() === '+' || !this.getPrefix()) {
         this.errors.prefix.message = 'Please select your country.'
 
         return false
@@ -102,10 +95,7 @@ export default {
         .get(url, { withCredentials: true })
         .then(response => {
           console.log(response)
-          self.$store.commit(
-            'updatePhone',
-            self.prefixCode.substring(1) + self.phoneNumber
-          )
+          self.$store.commit('updatePhone', self.getPrefix() + self.phoneNumber)
           self.$router.push('verify')
         })
         .catch(error => console.log(error))
