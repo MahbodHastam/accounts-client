@@ -174,7 +174,7 @@ export default {
 .borders {
   width: 100%;
 }
-@media screen and (min-width: 500px){
+@media screen and (min-width: 500px) {
   .borders {
     width: 500px;
     margin: 0 auto;

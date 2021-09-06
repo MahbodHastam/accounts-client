@@ -2,14 +2,12 @@
   <div class="login-cmp-wrapper">
     <div class="borders">
       <div class="inputs">
-        <select v-model="prefix" name="country" id="country-code" required>
-          <option value="+" disabled hidden selected
-            >Select Your Country</option
-          >
-          <option value="+98">IRI (+98)</option>
-          <option value="+1">US (+1)</option>
-        </select>
-        <p id="code-model">{{ prefix }}</p>
+        <select-box
+          :options="['IRI (+98)', 'US (+1)']"
+          :default="'IRI (+98)'"
+          @selectedOption="prefix = $event"
+        />
+        <p id="code-model">{{ this.getPrefix() }}</p>
         <input
           type="tel"
           placeholder="example: 9920800113"
@@ -36,16 +34,18 @@
 
 <script>
 import Alert from './Alert.vue'
+import SelectBox from './SelectBox.vue'
 import axios from 'axios'
 
 export default {
   components: {
-    Alert
+    Alert,
+    SelectBox
   },
 
   data() {
     return {
-      prefix: '+',
+      prefix: '+98',
       phoneNumber: null,
       errors: {
         phoneNumber: { message: false },
@@ -57,7 +57,7 @@ export default {
   methods: {
     validateInputs() {
       const isValid =
-        this.prefix === '+98' || this.prefix === '+'
+        this.getPrefix() === '+98'
           ? new RegExp('^(\\98|0)?9\\d{9}$').test(this.phoneNumber)
           : false
 
@@ -67,7 +67,7 @@ export default {
         return false
       } else this.errors.phoneNumber.message = false
 
-      if (this.prefix === '+') {
+      if (this.getPrefix() === '+' || !this.getPrefix()) {
         this.errors.prefix.message = 'Please select your country.'
 
         return false
@@ -76,12 +76,17 @@ export default {
       return true
     },
 
+    getPrefix() {
+      let prefix = this.prefix.search(/\+\d+/g)
+
+      return this.prefix.slice(prefix).replace(')', '')
+    },
+
     next() {
       var self = this
-      var url =
-        'https://accounts.myren.xyz/api/v1/generateCode?phone_number=' +
-        this.prefix.substring(1) +
+      const url = `https://accounts.myren.xyz/api/v1/generateCode?phone_number=${this.getPrefix()}${
         this.phoneNumber
+      }`
       console.log(url)
 
       if (!this.validateInputs()) return null
@@ -90,10 +95,7 @@ export default {
         .get(url, { withCredentials: true })
         .then(response => {
           console.log(response)
-          self.$store.commit(
-            'updatePhone',
-            self.prefix.substring(1) + self.phoneNumber
-          )
+          self.$store.commit('updatePhone', self.getPrefix() + self.phoneNumber)
           self.$router.push('verify')
         })
         .catch(error => console.log(error))
