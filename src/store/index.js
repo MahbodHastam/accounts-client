@@ -6,7 +6,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     phoneNumber: null,
-
+    backTo: '',
     userInfo: {
       ok: null,
       ads_earnings: null,

@@ -41,8 +41,11 @@ export default {
         .then(response => {
           console.log(response)
           if (response.data.ok) {
-            console.log('done!')
-            self.$router.push('/')
+            if (this.$store.state.backTo) {
+              window.location.href = this.$store.state.backTo
+            } else {
+              self.$router.push('/')
+            }
           }
         })
         .catch(error => console.log(error))
