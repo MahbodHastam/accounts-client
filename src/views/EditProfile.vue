@@ -42,7 +42,7 @@ export default {
           console.log(response)
           if (response.data.ok) {
             if (this.$store.state.backTo) {
-              window.location.href = this.$store.state.backTo
+              window.location = this.$store.state.backTo
             } else {
               self.$router.push('/')
             }

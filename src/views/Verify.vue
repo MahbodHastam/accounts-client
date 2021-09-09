@@ -70,7 +70,11 @@ export default {
                 ) {
                   self.$router.push('editprofile')
                 } else {
-                  self.$router.push('/')
+                  if (this.$store.state.backTo.length > 0) {
+                    window.location = this.$store.state.backTo
+                  } else {
+                    self.$router.push('/')
+                  }
                 }
               })
               .catch(error => console.log(error))
