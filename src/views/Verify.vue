@@ -71,7 +71,7 @@ export default {
                   self.$router.push('editprofile')
                 } else {
                   if (this.$store.state.backTo.length > 0) {
-                    window.location = this.$store.state.backTo
+                    window.location.href = this.$store.state.backTo
                   } else {
                     self.$router.push('/')
                   }
