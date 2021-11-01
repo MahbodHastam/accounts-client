@@ -44,7 +44,6 @@ export default {
   name: 'Home',
   computed: mapState(['userInfo']),
   beforeCreate() {
-    var self = this
     axios
       .get('https://accounts.myren.xyz/api/v1/getProfile', {
         withCredentials: true
@@ -52,11 +51,12 @@ export default {
       .then(response => {
         //   console.log(response.data)
         if (response.data.ok) {
-          self.$store.commit('updateUserInfo', response.data)
+          this.$store.commit('updateUserInfo', response.data)
         } else {
-          if (this.$route.query.to.length > 0)
+          if (this.$route.query.to.length > 0) {
             this.$store.state.backTo = this.$route.query.to
-          self.$router.push('/signin')
+          }
+          this.$router.push('/signin')
         }
         //   self.$store.state
       })
