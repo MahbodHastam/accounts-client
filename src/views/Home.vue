@@ -53,7 +53,7 @@ export default {
         if (response.data.ok) {
           this.$store.commit('updateUserInfo', response.data)
         } else {
-          if (this.$route.query.to.length > 0) {
+          if (this.$route.query.to?.length > 0) {
             this.$store.state.backTo = this.$route.query.to
           }
           this.$router.push('/signin')
