@@ -6,7 +6,11 @@
       </div>
 
       <p>
-        Verification code has been sent to {{ this.$store.state.phoneNumber }},
+        Verification code has been sent to
+        <span v-if="$store.selectedMethod === 'phone-login'">
+          {{ this.$store.state.phoneNumber }}
+        </span>
+        <span v-else>{{ $store.state.email }}</span>
         please check it and enter it in input below and make sure you are not
         entering it wrong.
       </p>
@@ -20,13 +24,28 @@
           maxlength="6"
           autocomplete="off"
         />
+        <alert
+          v-for="(error, index) in errors"
+          :key="index"
+          v-show="error.message"
+          :message="error.message"
+          type="danger"
+        />
 
         <p class="std">
-          Didn't Received Yet? <span @click="requestAgain">Request Again</span>
+          Didn't Received Yet?
+          <span @click="requestAgain($store.state.selectedMethod)"
+            >Request Again</span
+          >
         </p>
       </div>
       <div class="bottom-actions">
-        <button class="actions" @click="back">Wrong Number?</button>
+        <button class="actions" @click="back">
+          <span v-if="$store.state.selectedMethod === 'phone-login'"
+            >Wrong Number?</span
+          >
+          <span v-else>Wrong E-Mail?</span>
+        </button>
         <button class="actions next" @click="next">Next</button>
       </div>
     </div>
@@ -35,29 +54,38 @@
 
 <script>
 import axios from 'axios'
+import Alert from '@/components/Alert.vue'
+
 export default {
+  components: { Alert },
   data() {
     return {
-      code: null
+      code: null,
+      errors: {
+        code: { message: null }
+      }
     }
   },
   methods: {
     next() {
       if (this.code == null || this.code.length != 6) {
-        // console.log(this.code)
-        return
-      }
+        this.errors.code.message = 'You entered a wrong code'
+        return null
+      } else this.errors.code.message = null
+
+      let url
+      if (this.$store.state.selectedMethod === 'phone-login')
+        url = `https://accounts.myren.xyz/api/v1/verifyCode?phone_number=${this.$store.state.phoneNumber}&verification_code=${this.code}`
+      else
+        url = `https://accounts.myren.xyz/api/v1/verifyCode?email=${this.$store.state.email}&verification_code=${this.code}`
 
       var self = this
       axios
-        .get(
-          `https://accounts.myren.xyz/api/v1/verifyCode?phone_number=${self.$store.state.phoneNumber}&verification_code=${self.code}`,
-          { withCredentials: true }
-        )
+        .get(url, { withCredentials: true })
         .then(response => {
           console.log(response)
           if (response.data.ok) {
-            //get name and last name if it has default value route to editprofile
+            // get name and last name if it has default value route to editprofile
             axios
               .get('https://accounts.myren.xyz/api/v1/getProfile', {
                 withCredentials: true
@@ -87,12 +115,15 @@ export default {
     back() {
       this.$router.push('/signin')
     },
-    requestAgain() {
+    requestAgain(method) {
+      let url
+      if (method === 'phone-login')
+        url = `https://accounts.myren.xyz/api/v1/generateCode?phone_number=${this.$store.state.phoneNumber}`
+      else
+        url = `https://accounts.myren.xyz/api/v1/generateCode?email=${this.$store.state.email}`
+
       axios
-        .get(
-          `https://accounts.myren.xyz/api/v1/generateCode?phone_number=${this.$store.state.phoneNumber}`,
-          { withCredentials: true }
-        )
+        .get(url, { withCredentials: true })
         .then(response => {
           console.log(response)
         })
@@ -174,6 +205,7 @@ export default {
 }
 .std span {
   color: #003cff;
+  cursor: pointer;
 }
 .borders {
   width: 100%;

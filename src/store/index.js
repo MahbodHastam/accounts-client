@@ -6,6 +6,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     phoneNumber: null,
+    email: null,
+    selectedMethod: 'phone-login',
     backTo: '',
     userInfo: {
       ok: null,
@@ -22,6 +24,12 @@ export default new Vuex.Store({
   mutations: {
     updatePhone(state, number) {
       state.phoneNumber = number
+    },
+    updateEmail(state, email) {
+      state.email = email
+    },
+    updateSelectedMethod(state, method) {
+      state.selectedMethod = method
     },
     updateUserInfo(state, payload) {
       state.userInfo = payload
