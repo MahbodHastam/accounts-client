@@ -63,7 +63,7 @@ export default {
       axios
         .get(url, { withCredentials: true })
         .then(() => {
-          self.$store.commit('updateEmail', this.email)
+          self.$store.commit('UPDATE_EMAIL', this.email)
           self.$router.push('verify')
         })
         .catch(error => console.error(error))

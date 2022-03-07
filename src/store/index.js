@@ -22,16 +22,16 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    updatePhone(state, number) {
+    UPDATE_PHONE(state, number) {
       state.phoneNumber = number
     },
-    updateEmail(state, email) {
+    UPDATE_EMAIL(state, email) {
       state.email = email
     },
-    updateSelectedMethod(state, method) {
+    UPDATE_SELECTED_METHOD(state, method) {
       state.selectedMethod = method
     },
-    updateUserInfo(state, payload) {
+    UPDATE_USER_INFO(state, payload) {
       state.userInfo = payload
     }
   },

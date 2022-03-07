@@ -2,7 +2,7 @@
   <keep-alive>
     <component
       :is="$store.state.selectedMethod"
-      @selectedMethod="$store.commit('updateSelectedMethod', $event)"
+      @selectedMethod="$store.commit('UPDATE_SELECTED_METHOD', $event)"
     ></component>
   </keep-alive>
 </template>

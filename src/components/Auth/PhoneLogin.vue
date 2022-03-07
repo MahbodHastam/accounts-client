@@ -95,7 +95,7 @@ export default {
         .get(url, { withCredentials: true })
         .then(response => {
           console.log(response)
-          self.$store.commit('updatePhone', phoneNumber)
+          self.$store.commit('UPDATE_PHONE', phoneNumber)
           self.$router.push('verify')
         })
         .catch(error => console.log(error))

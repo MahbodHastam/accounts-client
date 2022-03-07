@@ -103,7 +103,7 @@ export default {
       .then(response => {
         //   console.log(response.data)
         if (response.data.ok) {
-          self.$store.commit('updateUserInfo', response.data)
+          self.$store.commit('UPDATE_USER_INFO', response.data)
         } else {
           // self.$router.push('/intro')
           self.$router.push('/signin')
