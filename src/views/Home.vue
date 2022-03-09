@@ -51,7 +51,7 @@ export default {
       .then(response => {
         //   console.log(response.data)
         if (response.data.ok) {
-          this.$store.commit('updateUserInfo', response.data)
+          this.$store.commit('UPDATE_USER_INFO', response.data)
         } else {
           if (this.$route.query.to?.length > 0) {
             this.$store.state.backTo = this.$route.query.to

@@ -1,129 +1,22 @@
 <template>
-  <div class="login-cmp-wrapper">
-    <div class="borders">
-      <div class="inputs">
-        <select-box
-          :options="['IRI (+98)', 'US (+1)']"
-          :default="'IRI (+98)'"
-          @selectedOption="prefix = $event"
-        />
-        <p id="code-model">{{ this.getPrefix() }}</p>
-        <input
-          type="tel"
-          placeholder="example: 9920800113"
-          v-model="phoneNumber"
-          id="phone-number"
-        />
-        <alert
-          v-for="(error, index) in errors"
-          :key="index"
-          v-show="error.message"
-          :message="error.message"
-          type="danger"
-        />
-      </div>
-
-      <!-- for going back and help -->
-      <div class="bottom-actions">
-        <button class="actions">Help</button>
-        <button class="actions next" @click="next">Next</button>
-      </div>
-    </div>
-  </div>
+  <keep-alive>
+    <component
+      :is="$store.state.selectedMethod"
+      @selectedMethod="$store.commit('UPDATE_SELECTED_METHOD', $event)"
+    ></component>
+  </keep-alive>
 </template>
 
 <script>
-import Alert from './Alert.vue'
-import SelectBox from './SelectBox.vue'
-import axios from 'axios'
+import PhoneLogin from './Auth/PhoneLogin.vue'
+import EmailLogin from './Auth/EmailLogin.vue'
 
 export default {
-  components: {
-    Alert,
-    SelectBox
-  },
-
-  data() {
-    return {
-      prefix: '+98',
-      phoneNumber: null,
-      errors: {
-        phoneNumber: { message: false },
-        prefix: { message: false }
-      }
-    }
-  },
-
-  methods: {
-    validateInputs() {
-      const isValid =
-        this.getPrefix() === '+98'
-          ? new RegExp('^(\\98|0)?9\\d{9}$').test(this.phoneNumber)
-          : false
-
-      if (!isValid) {
-        this.errors.phoneNumber.message = 'Your phone-number is incorrect.'
-
-        return false
-      } else this.errors.phoneNumber.message = false
-
-      if (this.getPrefix() === '+' || !this.getPrefix()) {
-        this.errors.prefix.message = 'Please select your country.'
-
-        return false
-      } else this.errors.prefix.message = false
-
-      return true
-    },
-
-    getPrefix() {
-      let prefix = this.prefix.search(/\+\d+/g)
-
-      return this.prefix.slice(prefix).replace(')', '')
-    },
-
-    next() {
-      var self = this
-      const url = `https://accounts.myren.xyz/api/v1/generateCode?phone_number=${this.getPrefix()}${
-        this.phoneNumber
-      }`
-      console.log(url)
-
-      if (!this.validateInputs()) return null
-
-      axios
-        .get(url, { withCredentials: true })
-        .then(response => {
-          console.log(response)
-          self.$store.commit('updatePhone', self.getPrefix() + self.phoneNumber)
-          self.$router.push('verify')
-        })
-        .catch(error => console.log(error))
-        .then(() => {})
-    }
-  }
+  components: { PhoneLogin, EmailLogin }
 }
 </script>
 
-<style scoped>
-.borders {
-  width: 100%;
-}
-#country-code {
-  padding: 10px;
-  border: none;
-  outline: none;
-  height: 48px;
-  display: inline-flex;
-  align-items: center;
-  width: 100%;
-  background-color: #eee;
-  border-radius: 24px;
-  margin-bottom: 8px;
-  font-size: 14px;
-  font-weight: normal;
-  font-family: 'Mulish', sans-serif;
-}
+<style>
 #code-model {
   padding: 10px;
   border: none;
@@ -133,13 +26,16 @@ export default {
   width: 30%;
   background-color: #eee;
   border-radius: 24px;
-
   display: inline-flex;
   place-items: center;
   place-content: center;
 }
 
-#phone-number {
+.inputs {
+  padding: 8px;
+}
+
+.inputs input {
   padding: 10px;
   border: none;
   outline: none;
@@ -147,27 +43,34 @@ export default {
   display: inline-flex;
   align-items: center;
   background-color: #eee;
-  width: calc(70% - 8px);
-  margin-left: 8px;
   border-radius: 24px;
 }
-.inputs {
-  padding: 8px;
+
+.inputs #phone-number {
+  width: calc(70% - 8px);
+  margin-left: 8px;
 }
+
+.inputs #email {
+  width: 100%;
+}
+
 .bottom-actions {
   /* position: absolute; */
   margin-top: 16px;
-  width: calc(100% - 32px);
+  /* width: calc(100% - 32px); */
   display: flex;
   justify-content: space-between;
+  padding: 0 10px;
 }
+
 .actions {
   border: none;
   outline: none;
-  font-size: 16px;
+  font-size: 12pt;
   background: none;
   height: 48px;
-  padding: 15px 26px;
+  /* padding: 15px 26px; */
   border-radius: 24px;
   display: flex;
   place-content: center;
@@ -175,7 +78,9 @@ export default {
   font-family: 'Mullish', sans-serif;
   font-weight: bold;
   min-width: 85px;
+  cursor: pointer;
 }
+
 .next {
   color: #003cff;
   background: #edf1ff;
