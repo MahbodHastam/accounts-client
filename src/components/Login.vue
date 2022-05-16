@@ -1,18 +1,19 @@
 <template>
   <keep-alive>
-    <component
+    <!-- <component
       :is="$store.state.selectedMethod"
       @selectedMethod="$store.commit('UPDATE_SELECTED_METHOD', $event)"
-    ></component>
+    ></component> -->
+    <email-login />
   </keep-alive>
 </template>
 
 <script>
-import PhoneLogin from './Auth/PhoneLogin.vue'
+// import PhoneLogin from './Auth/PhoneLogin.vue'
 import EmailLogin from './Auth/EmailLogin.vue'
 
 export default {
-  components: { PhoneLogin, EmailLogin }
+  components: { EmailLogin }
 }
 </script>
 
@@ -60,7 +61,7 @@ export default {
   margin-top: 16px;
   /* width: calc(100% - 32px); */
   display: flex;
-  justify-content: space-between;
+  justify-content: end;
   padding: 0 10px;
 }
 

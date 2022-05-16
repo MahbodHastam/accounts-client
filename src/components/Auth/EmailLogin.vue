@@ -18,9 +18,9 @@
       </div>
 
       <div class="bottom-actions">
-        <button class="actions" @click="$emit('selectedMethod', 'phone-login')">
+        <!-- <button class="actions" @click="$emit('selectedMethod', 'phone-login')">
           Continue using Phone number
-        </button>
+        </button> -->
         <button class="actions next" @click="next">Next</button>
       </div>
     </div>
