@@ -35,7 +35,7 @@ export default {
       var self = this
       axios
         .get(
-          `https://accounts.myren.xyz/api/v1/completeProfile?user_firstname=${self.firstName}&user_lastname=${self.lastName}`,
+          `https://accounts.myren.xyz/api/v1/completeProfile/${self.firstName}/${self.lastName}`,
           { withCredentials: true }
         )
         .then(response => {
