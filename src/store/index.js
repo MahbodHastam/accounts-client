@@ -7,16 +7,12 @@ export default createStore({
     selectedMethod: 'phone-login',
     backTo: null,
     userInfo: {
-      ok: null,
-      ads_earnings: null,
-      ads_personalization: null,
-      audiofy_history: null,
-      id: null,
-      show_ads: null,
-      user_firstname: null,
-      user_lastname: null,
-      user_avatar: null,
-      vidible_history: null
+      user_id: null,
+      email: null,
+      first_name: null,
+      last_name: null,
+      phone_number:  null,
+      exp: null,
     }
   },
   mutations: {

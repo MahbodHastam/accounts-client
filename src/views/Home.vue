@@ -4,8 +4,8 @@
       <div>
         <div id="avatar"></div>
         <h3>
-          Welcome {{ this.userInfo.user_firstname }}
-          {{ this.userInfo.user_lastname }}
+          Welcome {{ this.userInfo.first_name }}
+          {{ this.userInfo.last_name }}
         </h3>
       </div>
     </div>
@@ -44,24 +44,23 @@ export default {
   name: 'Home',
   computed: mapState(['userInfo']),
   beforeCreate() {
-    axios
-      .get('https://accounts.myren.xyz/api/v1/getProfile', {
-        withCredentials: true
-      })
-      .then(response => {
-        //   console.log(response.data)
-        if (response.data.ok) {
-          this.$store.commit('UPDATE_USER_INFO', response.data)
-        } else {
-          if (this.$route.query.to?.length > 0) {
-            this.$store.state.backTo = this.$route.query.to
-          }
-          this.$router.push('/signin')
-        }
-        //   self.$store.state
-      })
-      .catch(error => console.log(error))
-      .then(() => {})
+    if (this.userInfo && this.userInfo.user_id !== null) return
+    // get cookie named MYREN_TOKEN
+    let token = document.cookie.replace(
+      /(?:(?:^|.*;\s*)MYREN_TOKEN\s*\=\s*([^;]*).*$)|^.*$/,
+      '$1'
+    )
+    if (token == "") {
+      this.$router.push('/sign-in')
+      return
+    }
+    
+    // token split by .
+    let tokenSplit = token.split('.')
+    let tokenDecoded = JSON.parse(atob(tokenSplit[1]))
+
+    // update userInfo
+    this.$store.commit('UPDATE_USER_INFO', tokenDecoded)
   }
 }
 </script>

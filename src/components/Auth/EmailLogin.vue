@@ -54,17 +54,18 @@ export default {
 
       return res
     },
+
     next: function() {
       if (!this.validateInputs()) return null
 
-      const self = this
-      const url = `https://accounts.myren.xyz/api/v1/generateCode?email=${this.email}`
+      const url = `https://accounts.myren.xyz/api/v1/generateCode/email/${this.email}`
 
       axios
         .get(url, { withCredentials: true })
         .then(() => {
-          self.$store.commit('UPDATE_EMAIL', this.email)
-          self.$router.push('verify')
+          this.$store.commit('UPDATE_EMAIL', this.email)
+          this.$store.commit('UPDATE_SELECTED_METHOD', 'email-login')
+          this.$router.push('verify')
         })
         .catch(error => console.error(error))
     }

@@ -78,7 +78,7 @@ export default {
       if (this.$store.state.selectedMethod === 'phone-login')
         url = `https://accounts.myren.xyz/api/v1/verifyCode?phone_number=${this.$store.state.phoneNumber}&verification_code=${this.code}`
       else
-        url = `https://accounts.myren.xyz/api/v1/verifyCode?email=${this.$store.state.email}&verification_code=${this.code}`
+        url = `https://accounts.myren.xyz/api/v1/verifyCode/email/${this.$store.state.email}/${this.code}`
 
       var self = this
       axios
@@ -87,27 +87,7 @@ export default {
           console.log(response)
           if (response.data.ok) {
             // get name and last name if it has default value route to editprofile
-            axios
-              .get('https://accounts.myren.xyz/api/v1/getProfile', {
-                withCredentials: true
-              })
-              .then(response => {
-                //   console.log(response.data)
-                if (
-                  response.data.user_firstname == 'Guest' &&
-                  response.data.user_lastname == 'User'
-                ) {
-                  self.$router.push('edit-profile')
-                } else {
-                  if (this.$store.state.backTo.length > 0) {
-                    window.location.href = this.$store.state.backTo
-                  } else {
-                    self.$router.push('/')
-                  }
-                }
-              })
-              .catch(error => console.log(error))
-              .then(() => {})
+            this.$router.push('/')
           }
         })
         .catch(error => console.log(error))
