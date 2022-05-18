@@ -1,14 +1,10 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import { createRouter, createWebHistory } from 'vue-router'
 
-Vue.use(VueRouter)
-
-const routes = [
+export const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home,
+    component: () => import('../views/Home.vue'),
     meta: {
       title: 'Myren | Accounts'
     }
@@ -16,11 +12,7 @@ const routes = [
   {
     path: '/verify',
     name: 'Verify',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ '../views/Verify.vue'),
+    component: () => import('../views/Verify.vue'),
     // beforeEnter: (to, from, next) => {
     //   if (from.name !== 'Home') next({ name: 'Home' })
     //   else next()
@@ -30,15 +22,30 @@ const routes = [
     }
   },
   {
-    path: '/signin',
-    name: 'Signin',
-    component: () => import('../views/Signin.vue'),
+    path: '/sign-in',
+    name: 'SignIn',
+    component: () => import('../views/SignIn.vue'),
     meta: {
       title: 'Myren | Sign In'
     }
   },
   {
-    path: '/editprofile',
+    path: '/auth',
+    name: 'Auth',
+    component: () => import('../views/AuthorizationPage.vue'),
+    meta: {
+      title: 'Myren | Authorize Client'
+    },
+    children: [
+      {
+        path: 'single',
+        name: 'AuthSingle',
+        component: () => import('../views/AuthorizationPage.vue')
+      }
+    ]
+  },
+  {
+    path: '/edit-profile',
     name: 'EditProfile',
     component: () => import('../views/EditProfile.vue'),
     meta: {
@@ -71,10 +78,9 @@ const routes = [
   }
 ]
 
-const router = new VueRouter({
+export default createRouter({
   mode: 'history',
-  base: process.env.BASE_URL,
+  history: createWebHistory(),
+  // base: import.meta.env.BASE_URL,
   routes
 })
-
-export default router

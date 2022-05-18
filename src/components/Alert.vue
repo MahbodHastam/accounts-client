@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'Alert',
+  name: 'AppAlert',
   props: {
     message: [String, Boolean],
     type: String

@@ -1,14 +1,11 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import { createStore } from 'vuex'
 
-Vue.use(Vuex)
-
-export default new Vuex.Store({
+export default createStore({
   state: {
     phoneNumber: null,
     email: null,
     selectedMethod: 'phone-login',
-    backTo: '',
+    backTo: null,
     userInfo: {
       ok: null,
       ads_earnings: null,
@@ -18,6 +15,7 @@ export default new Vuex.Store({
       show_ads: null,
       user_firstname: null,
       user_lastname: null,
+      user_avatar: null,
       vidible_history: null
     }
   },
@@ -33,6 +31,9 @@ export default new Vuex.Store({
     },
     UPDATE_USER_INFO(state, payload) {
       state.userInfo = payload
+    },
+    UPDATE_BACK_TO_URL(state, url) {
+      state.backTo = url
     }
   },
   actions: {},
