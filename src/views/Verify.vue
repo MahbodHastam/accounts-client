@@ -57,6 +57,7 @@ import axios from 'axios'
 import Alert from '@/components/Alert.vue'
 
 export default {
+  name: 'VerifyPage',
   components: { Alert },
   data() {
     return {
@@ -96,7 +97,7 @@ export default {
                   response.data.user_firstname == 'Guest' &&
                   response.data.user_lastname == 'User'
                 ) {
-                  self.$router.push('editprofile')
+                  self.$router.push('edit-profile')
                 } else {
                   if (this.$store.state.backTo.length > 0) {
                     window.location.href = this.$store.state.backTo
@@ -113,7 +114,7 @@ export default {
         .then()
     },
     back() {
-      this.$router.push('/signin')
+      this.$router.push('/sign-in')
     },
     requestAgain(method) {
       let url

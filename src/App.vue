@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <div id="nav" v-if="route.path !== '/auth/single'">
       <div class="nav-item">
         <!-- <ion-icon name="menu-outline"></ion-icon> -->
       </div>
@@ -15,17 +15,19 @@
   </div>
 </template>
 
-<script>
-export default {
-  watch: {
-    $route: {
-      handler: to => {
-        document.title = to.meta.title || 'Your Website'
-      },
-      immediate: true
-    }
-  }
-}
+<script setup>
+import { watch } from 'vue'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
+
+watch(
+  route,
+  newRoute => {
+    document.title = newRoute.meta.title
+  },
+  { immediate: true }
+)
 </script>
 
 <style>
@@ -80,7 +82,15 @@ p {
 input,
 select,
 option {
-  font-family: mulish;
+  font-family: 'Mulish', sans-serif;
   font-weight: 300;
+}
+
+.font-mulish {
+  font-family: 'Mulish', sans-serif;
+}
+
+.font-poppins {
+  font-family: 'Poppins', sans-serif;
 }
 </style>
