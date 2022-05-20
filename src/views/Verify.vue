@@ -101,7 +101,7 @@ export default {
               this.$store.state.userInfo.firstName == null ||
               this.$store.state.userInfo.lastName == null
             ) {
-              this.$router.push('/complete-profile')
+              this.$router.push('/edit-profile')
             } else {
               this.$router.push('/')
             }
