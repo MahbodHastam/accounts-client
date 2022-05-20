@@ -98,8 +98,8 @@ export default {
             this.$store.commit('UPDATE_USER_INFO', tokenDecoded)
             // if user firstname and lastname is null, redirect to complete profile
             if (
-              this.$store.state.userInfo.firstName == null ||
-              this.$store.state.userInfo.lastName == null
+              this.$store.state.userInfo.first_name == null ||
+              this.$store.state.userInfo.last_name == null
             ) {
               this.$router.push('/edit-profile')
             } else {
