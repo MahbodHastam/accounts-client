@@ -86,8 +86,25 @@ export default {
         .then(response => {
           console.log(response)
           if (response.data.ok) {
-            // get name and last name if it has default value route to editprofile
-            this.$router.push('/')
+            // get cookie and parse it
+            let token = document.cookie.replace(
+              /(?:(?:^|.*;\s*)MYREN_TOKEN\s*\=\s*([^;]*).*$)|^.*$/,
+              '$1'
+            )
+            // token split by .
+            let tokenSplit = token.split('.')
+            let tokenDecoded = JSON.parse(atob(tokenSplit[1]))
+
+            this.$store.commit('UPDATE_USER_INFO', tokenDecoded)
+            // if user firstname and lastname is null, redirect to complete profile
+            if (
+              this.$store.state.userInfo.firstName == null ||
+              this.$store.state.userInfo.lastName == null
+            ) {
+              this.$router.push('/complete-profile')
+            } else {
+              this.$router.push('/')
+            }
           }
         })
         .catch(error => console.log(error))
