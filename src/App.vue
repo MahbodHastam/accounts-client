@@ -18,8 +18,31 @@
 <script setup>
 import { watch } from 'vue'
 import { useRoute } from 'vue-router'
-
+import { useStore } from 'vuex'
+import router from './router';
+const store = useStore()
 const route = useRoute()
+
+function _(){
+  if (store.userInfo && store.user_id !== null) return
+    // get cookie named MYREN_TOKEN
+    let token = document.cookie.replace(
+      /(?:(?:^|.*;\s*)MYREN_TOKEN\s*\=\s*([^;]*).*$)|^.*$/,
+      '$1'
+    )
+    if (token == "") {
+      router.push('/sign-in')
+      return
+    }
+    
+    // token split by .
+    let tokenSplit = token.split('.')
+    let tokenDecoded = JSON.parse(atob(tokenSplit[1]))
+
+    // update userInfo
+    store.commit('UPDATE_USER_INFO', tokenDecoded)
+}
+_()
 
 watch(
   route,

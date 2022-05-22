@@ -43,27 +43,9 @@ import { mapState } from 'vuex'
 export default {
   name: 'Home',
   computed: mapState(['userInfo']),
-  beforeCreate() {
-    if (this.userInfo && this.userInfo.user_id !== null) return
-    // get cookie named MYREN_TOKEN
-    let token = document.cookie.replace(
-      /(?:(?:^|.*;\s*)MYREN_TOKEN\s*\=\s*([^;]*).*$)|^.*$/,
-      '$1'
-    )
-    if (token == "") {
-      this.$router.push('/sign-in')
-      return
-    }
-    
-    // token split by .
-    let tokenSplit = token.split('.')
-    let tokenDecoded = JSON.parse(atob(tokenSplit[1]))
-
-    // update userInfo
-    this.$store.commit('UPDATE_USER_INFO', tokenDecoded)
-  }
 }
 </script>
+
 <style scoped>
 .topper {
   height: 30vh;

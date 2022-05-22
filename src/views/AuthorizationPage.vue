@@ -19,13 +19,13 @@
         />
         <div class="user-avatar" v-else>
           {{
-            userInfo.user_firstname.charAt(0, 1) +
-              userInfo.user_lastname.charAt(0, 1)
+            userInfo.first_name.charAt(0, 1) +
+              userInfo.last_name.charAt(0, 1)
           }}
         </div>
         <div class="name">
           <span class="small">continue as</span>
-          <h3>{{ userInfo.user_firstname + ' ' + userInfo.user_lastname }}</h3>
+          <h3>{{ userInfo.first_name + ' ' + userInfo.last_name }}</h3>
         </div>
       </div>
       <div class="action-buttons">
@@ -39,16 +39,12 @@
 <script setup>
 import { onMounted } from 'vue'
 import { useRoute } from 'vue-router'
-// import { useStore } from 'vuex'
+import { useStore } from 'vuex'
 
 const route = useRoute()
-// const store = useStore()
-// const userInfo = store.state.userInfo
-const userInfo = {
-  user_avatar: null,
-  user_firstname: 'Mahbod',
-  user_lastname: 'Ahmadi'
-}
+const store = useStore()
+const userInfo = store.state.userInfo
+
 
 onMounted(() => {
   if (!route.query.source) console.log('"source" not defined on url')
