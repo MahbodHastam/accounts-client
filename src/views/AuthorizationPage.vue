@@ -51,7 +51,7 @@ onMounted(() => {
 })
 
 const deny = () => {
-  window.open('','_self').close()
+  window.close()
 }
 </script>
 
