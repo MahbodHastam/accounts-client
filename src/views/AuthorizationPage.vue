@@ -6,7 +6,7 @@
         <p>MYREN</p>
       </div>
       <p class="text">
-        Hi, <a href="#">{{ route.query.source || 'UNDEFINED' }}</a> wants to
+        Hi, <a :href="route.query.source || '#'" target="_blank">{{ route.query.source || 'UNDEFINED' }}</a> wants to
         sign you in via Myren Account.
       </p>
       <div class="account-details font-mulish">
@@ -29,7 +29,7 @@
         </div>
       </div>
       <div class="action-buttons">
-        <button type="button">Deny</button>
+        <button type="button" @click="deny">Deny</button>
         <button type="button" class="allow-btn">Allow</button>
       </div>
     </div>
@@ -49,6 +49,10 @@ const userInfo = store.state.userInfo
 onMounted(() => {
   if (!route.query.source) console.log('"source" not defined on url')
 })
+
+const deny = () => {
+  window.open('','_self').close()
+}
 </script>
 
 <style scoped>
@@ -79,8 +83,8 @@ onMounted(() => {
 }
 
 .logo-container img {
-  width: 240px;
-  height: 160px;
+  width: 120px;
+  height: 80px;
 }
 
 .logo-container p {
