@@ -30,7 +30,7 @@
       </div>
       <div class="action-buttons">
         <button type="button" @click="deny">Deny</button>
-        <button type="button" class="allow-btn">Allow</button>
+        <button type="button" class="allow-btn" @click="allow">Allow</button>
       </div>
     </div>
   </div>
@@ -40,6 +40,7 @@
 import { onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'
+import router from '../router'
 
 const route = useRoute()
 const store = useStore()
@@ -47,11 +48,26 @@ const userInfo = store.state.userInfo
 
 
 onMounted(() => {
-  if (!route.query.source) console.log('"source" not defined on url')
+  if (!window.opener) router.push('/');
+  if (!route.query.source) console.log('"source" or "loc" not defined on url')
 })
 
 const deny = () => {
   window.close()
+}
+
+const allow = () => {
+  pm()
+}
+
+const pm = () => {
+  // fetch code then post
+  let data = {
+    code: '123456',
+    source: route.query.source,
+  }
+  window.opener.postMessage(data, route.query.loc)
+  // window.close()
 }
 </script>
 
