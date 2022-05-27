@@ -22,13 +22,22 @@ export default () => {
   const loading = ref(false)
   const payload = ref(null)
   const error = ref(null)
+  const success = ref(false)
 
   const get = async (url, headers = {}) => {
     loading.value = true
     try {
       const response = await Axios.get(url, { headers })
-      payload.value = response.data
-      if (response.status) loading.value = false
+      const responseData = response.data
+      payload.value = responseData
+      if (response.status && responseData.ok) {
+        loading.value = false
+        success.value = true
+      }
+      if (response.status && !responseData.ok) {
+        error.value = responseData.data
+        console.error(error.value)
+      }
     } catch (err) {
       error.value = err
     }
@@ -37,11 +46,17 @@ export default () => {
   const post = async (url, data = {}, headers = {}) => {
     loading.value = true
     try {
-      const response = await Axios.post(url, data, {
-        headers
-      })
-      payload.value = response.data
-      if (response.status) loading.value = false
+      const response = await Axios.post(url, data, { headers })
+      const responseData = response.data
+      payload.value = responseData
+      if (response.status && responseData.ok) {
+        loading.value = false
+        success.value = true
+      }
+      if (response.status && !responseData.ok) {
+        error.value = responseData.data
+        console.error(error.value)
+      }
     } catch (err) {
       error.value = err
     }
@@ -51,6 +66,7 @@ export default () => {
     payload: readonly(payload),
     loading: readonly(loading),
     error: readonly(error),
+    success: readonly(success),
     get,
     post
   }
