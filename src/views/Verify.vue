@@ -46,25 +46,36 @@
           >
           <span v-else>Wrong E-Mail?</span>
         </button>
-        <button class="actions next" @click="next">Next</button>
+        <!-- <button class="actions next" @click="next">Next</button> -->
+        <AppButton
+          class="actions next"
+          :disabled="loading"
+          :isLoading="loading"
+          @click="next"
+        >
+          <span v-show="!loading">Next</span>
+        </AppButton>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
 import Alert from '@/components/Alert.vue'
+import AppButton from '@/components/AppButton.vue'
+import useAxios from '@/composables/useAxios'
 
 export default {
   name: 'VerifyPage',
-  components: { Alert },
+  components: { Alert, AppButton },
   data() {
     return {
       code: null,
       errors: {
-        code: { message: null }
-      }
+        code: { message: null },
+        request: { message: null }
+      },
+      loading: false
     }
   },
   methods: {
@@ -75,40 +86,46 @@ export default {
       } else this.errors.code.message = null
 
       let url
-      if (this.$store.state.selectedMethod === 'phone-login')
-        url = `https://accounts.myren.xyz/api/v1/verifyCode?phone_number=${this.$store.state.phoneNumber}&verification_code=${this.code}`
-      else
-        url = `https://accounts.myren.xyz/api/v1/verifyCode/email/${this.$store.state.email}/${this.code}`
+      if (this.$store.state.selectedMethod === 'phone-login') {
+        url = `verifyCode/phone/${this.$store.state.phoneNumber}/${this.code}`
+      } else {
+        url = `verifyCode/email/${this.$store.state.email}/${this.code}`
+      }
 
-      var self = this
-      axios
-        .get(url, { withCredentials: true })
-        .then(response => {
-          console.log(response)
-          if (response.data.ok) {
-            // get cookie and parse it
-            let token = document.cookie.replace(
-              /(?:(?:^|.*;\s*)MYREN_TOKEN\s*\=\s*([^;]*).*$)|^.*$/,
-              '$1'
-            )
-            // token split by .
-            let tokenSplit = token.split('.')
-            let tokenDecoded = JSON.parse(atob(tokenSplit[1]))
+      const { get, loading, payload, error } = useAxios()
 
-            this.$store.commit('UPDATE_USER_INFO', tokenDecoded)
-            // if user firstname and lastname is null, redirect to complete profile
-            if (
-              this.$store.state.userInfo.first_name == null ||
-              this.$store.state.userInfo.last_name == null
-            ) {
-              this.$router.push('/edit-profile')
-            } else {
-              this.$router.push('/')
-            }
+      this.loading = loading
+
+      get(url).then(() => {
+        console.log('payload', payload.value)
+
+        if (payload.value.ok) {
+          // get cookie and parse it
+          let token = document.cookie.replace(
+            // eslint-disable-next-line no-useless-escape
+            /(?:(?:^|.*;\s*)MYREN_TOKEN\s*\=\s*([^;]*).*$)|^.*$/,
+            '$1'
+          )
+          // token split by .
+          let tokenSplit = token.split('.')
+          let tokenDecoded = JSON.parse(atob(tokenSplit[1]))
+          this.$store.commit('UPDATE_USER_INFO', tokenDecoded)
+
+          // if user firstname and lastname is null, redirect to complete profile
+          if (
+            this.$store.state.userInfo.first_name === null ||
+            this.$store.state.userInfo.last_name === null
+          ) {
+            this.$router.push('/edit-profile')
+          } else {
+            this.$router.push('/')
           }
-        })
-        .catch(error => console.log(error))
-        .then()
+        }
+
+        if (error.value) {
+          this.errors.request.message = error.value
+        } else this.errors.request.message = null
+      })
     },
     back() {
       this.$router.push('/sign-in')
@@ -116,17 +133,20 @@ export default {
     requestAgain(method) {
       let url
       if (method === 'phone-login')
-        url = `https://accounts.myren.xyz/api/v1/generateCode?phone_number=${this.$store.state.phoneNumber}`
-      else
-        url = `https://accounts.myren.xyz/api/v1/generateCode?email=${this.$store.state.email}`
+        url = `generateCode/phone/${this.$store.state.phoneNumber}`
+      else url = `generateCode/email/${this.$store.state.email}`
 
-      axios
-        .get(url, { withCredentials: true })
-        .then(response => {
-          console.log(response)
-        })
-        .catch(error => console.log(error))
-        .then()
+      const { get, loading, payload, error } = useAxios()
+
+      this.loading = loading
+
+      get(url).then(() => {
+        console.log('payload', payload.value)
+
+        if (error.value) {
+          this.errors.request.message = error.value
+        } else this.errors.request.message = null
+      })
     }
   }
 }

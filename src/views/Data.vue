@@ -84,61 +84,65 @@
 
       <div class="bottom-actions">
         <button class="actions" @click="back">Back</button>
-        <button class="actions next" @click="save">Save</button>
+        <AppButton
+          class="actions next"
+          :disabled="loading"
+          :isLoading="loading"
+          @click="next"
+        >
+          <span v-show="!loading">Save</span>
+        </AppButton>
       </div>
     </div>
   </div>
 </template>
 <script>
-import axios from 'axios'
 import { mapState } from 'vuex'
+import useAxios from '@/composables/useAxios'
+import AppButton from '@/components/AppButton.vue'
+
 export default {
+  name: 'DataPage',
+  components: { AppButton },
   computed: mapState(['userInfo']),
   beforeCreate() {
     var self = this
-    axios
-      .get('https://accounts.myren.xyz/api/v1/getProfile', {
-        withCredentials: true
-      })
-      .then(response => {
-        //   console.log(response.data)
-        if (response.data.ok) {
-          self.$store.commit('UPDATE_USER_INFO', response.data)
-        } else {
-          // self.$router.push('/intro')
-          self.$router.push('/signin')
-        }
-        //   self.$store.state
-      })
-      .catch(error => console.log(error))
-      .then(() => {})
+
+    const { get, loading, payload, success } = useAxios()
+
+    this.loading = loading
+
+    get('getProfile').then(() => {
+      if (success.value) {
+        self.$store.commit('UPDATE_USER_INFO', payload.value.data)
+      } else {
+        self.$router.push('/sign-in')
+      }
+    })
   },
   methods: {
     save() {
       var self = this
-      axios
-        .get(
-          `https://accounts.myren.xyz/api/v1/updateSettings?audiofy_history=${String(
-            self.userInfo.audiofy_history
-          )}&vidible_history=${String(
-            self.userInfo.vidible_history
-          )}&show_ads=${String(
-            self.userInfo.show_ads
-          )}&ads_personalization=${String(
-            self.userInfo.ads_personalization
-          )}&ads_earnings=${String(self.userInfo.ads_earnings)}`,
-          { withCredentials: true }
-        )
-        .then(response => {
-          console.log(response)
-          if (response.data.ok) {
-            console.log('done!')
-            //go to show all products!
-            self.$router.push('/')
-          }
-        })
-        .catch(error => console.log(error))
-        .then()
+
+      const { get, success, loading } = useAxios()
+
+      this.loading = loading
+
+      get(
+        `updateSettings?audiofy_history=${String(
+          self.userInfo.audiofy_history
+        )}&vidible_history=${String(
+          self.userInfo.vidible_history
+        )}&show_ads=${String(
+          self.userInfo.show_ads
+        )}&ads_personalization=${String(
+          self.userInfo.ads_personalization
+        )}&ads_earnings=${String(self.userInfo.ads_earnings)}`
+      ).then(() => {
+        if (success.value) {
+          self.$router.push('/')
+        }
+      })
     },
     changeShowAds() {
       this.userInfo.show_ads = !this.userInfo.show_ads

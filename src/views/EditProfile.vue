@@ -15,15 +15,25 @@
 
       <div class="bottom-actions">
         <button class="actions">Privacy</button>
-        <button class="actions next" @click="complete">Save</button>
+        <AppButton
+          class="actions next"
+          :disabled="loading"
+          :isLoading="loading"
+          @click="complete"
+        >
+          <span v-show="!loading">Save</span>
+        </AppButton>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
+import useAxios from '@/composables/useAxios'
+import AppButton from '@/components/AppButton.vue'
+
 export default {
+  components: { AppButton },
   data() {
     return {
       firstName: null,
@@ -33,23 +43,20 @@ export default {
   methods: {
     complete() {
       var self = this
-      axios
-        .get(
-          `https://accounts.myren.xyz/api/v1/completeProfile/${self.firstName}/${self.lastName}`,
-          { withCredentials: true }
-        )
-        .then(response => {
-          console.log(response)
-          if (response.data.ok) {
-            if (this.$store.state.backTo) {
-              window.location.href = this.$store.state.backTo
-            } else {
-              self.$router.push('/')
-            }
+
+      const { get, success, loading } = useAxios()
+
+      this.loading = loading
+
+      get(`completeProfile/${self.firstName}/${self.lastName}`).then(() => {
+        if (success.value) {
+          if (this.$store.state.backTo) {
+            window.location.href = this.$store.state.backTo
+          } else {
+            self.$router.push('/')
           }
-        })
-        .catch(error => console.log(error))
-        .then()
+        }
+      })
     }
   }
 }

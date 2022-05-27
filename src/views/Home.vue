@@ -38,11 +38,11 @@
   </div>
 </template>
 <script>
-import axios from 'axios'
 import { mapState } from 'vuex'
+
 export default {
-  name: 'Home',
-  computed: mapState(['userInfo']),
+  name: 'HomePage',
+  computed: mapState(['userInfo'])
 }
 </script>
 

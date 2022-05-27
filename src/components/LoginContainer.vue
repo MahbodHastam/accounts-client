@@ -82,4 +82,11 @@ import EmailLogin from './Auth/EmailLogin.vue'
   color: #003cff;
   background: #edf1ff;
 }
+
+.next:disabled,
+.next[disabled] {
+  opacity: 0.5;
+  user-select: none;
+  cursor: not-allowed;
+}
 </style>

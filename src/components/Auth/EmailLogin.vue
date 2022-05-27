@@ -21,7 +21,14 @@
         <!-- <button class="actions" @click="$emit('selectedMethod', 'phone-login')">
           Continue using Phone number
         </button> -->
-        <button class="actions next" @click="next">Next</button>
+        <AppButton
+          class="actions next"
+          :disabled="loading"
+          :isLoading="loading"
+          @click="next"
+        >
+          <span v-show="!loading">Next</span>
+        </AppButton>
       </div>
     </div>
   </div>
@@ -29,16 +36,19 @@
 
 <script>
 import Alert from '../Alert.vue'
-import axios from 'axios'
+import AppButton from '../AppButton.vue'
+import useAxios from '@/composables/useAxios'
 
 export default {
-  components: { Alert },
+  components: { Alert, AppButton },
   data: function() {
     return {
       email: null,
       errors: {
-        email: { message: null }
-      }
+        email: { message: null },
+        request: { message: null }
+      },
+      loading: false
     }
   },
   methods: {
@@ -55,19 +65,22 @@ export default {
       return res
     },
 
-    next: function() {
+    next: async function() {
       if (!this.validateInputs()) return null
 
-      const url = `https://accounts.myren.xyz/api/v1/generateCode/email/${this.email}`
+      const { get, loading, error, payload } = useAxios()
 
-      axios
-        .get(url, { withCredentials: true })
-        .then(() => {
-          this.$store.commit('UPDATE_EMAIL', this.email)
-          this.$store.commit('UPDATE_SELECTED_METHOD', 'email-login')
-          this.$router.push('verify')
-        })
-        .catch(error => console.error(error))
+      this.loading = loading
+
+      await get(`generateCode/email/${this.email}`).then(() => {
+        this.$store.commit('UPDATE_EMAIL', this.email)
+        this.$store.commit('UPDATE_SELECTED_METHOD', 'email-login')
+        this.$router.push('verify')
+      })
+
+      if (!payload.value?.data?.ok || error.value) {
+        this.errors.request.message = payload.value?.data || null
+      } else this.errors.request.message = null
     }
   }
 }
